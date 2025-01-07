@@ -1,9 +1,9 @@
 from pyrogram import Client, filters, enums
-from config import SUDO_USERS
+from config import SUDO_USER
 from tts_utils import generate_tts
 
 @Client.on_message(
-    filters.command(["tts"], ".") & (filters.me | filters.user(SUDO_USERS))
+    filters.command(["tts"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def text_to_speech(client, message):
     """Handles the text-to-speech command."""
