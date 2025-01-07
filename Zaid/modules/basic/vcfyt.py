@@ -1,5 +1,5 @@
 from pyrogram import Client, filters, enums
-from config import SUDO_USER
+from config import SUDO_USERS
 from tts_utils import generate_tts
 from Zaid import app, SUDO_USER
 
