@@ -1,6 +1,6 @@
 from pyrogram import Client, filters, enums
 from config import SUDO_USERS
-from Zaid.modules.tts_utils import generate_tts
+from Zaid.modules.basic.tts_utils import generate_tts
 from Zaid import app, SUDO_USER
 
 @Client.on_message(
