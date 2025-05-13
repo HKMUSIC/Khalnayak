@@ -24,7 +24,7 @@ else:
         f"├• **𝐏ʏʀᴏɢʀᴀᴍ**: `{__version__}`\n"
         f"├• **𝐒ᴜᴘᴘᴏʀᴛ**: [Click](https://t.me/MASTIWITHFRIENDSXD)\n"
         f"├• **𝐔ᴘᴅᴀᴛᴇ**: [Click](https://t.me/StrangerAssociation)\n"
-        f"└• **𝐇ᴏᴛᴇʀ**: [Click](https://t.me/Shukla_op_clone1bot)"        
+        f"└• **𝐇ᴏᴛᴇʀ**: [Click](https://t.me/StrangerUBbot)"        
     )
 
 @Client.on_message(
@@ -57,7 +57,7 @@ async def repo(bot: Client, message: Message):
     await asyncio.sleep(1)
     await message.edit("Fetching Source Code.....")
     await asyncio.sleep(1)
-    await message.edit("Ⰶ ʜᴇʀᴇ ɪs ғʀᴇᴇ sᴛʀᴀɴɢᴇʀ ᴜsᴇʀʙᴏᴛ ʜᴏsᴛᴇʀ: \n\n[𝐒𝐓𝐑𝐀𝐍𝐆𝐄𝐑 𝐔𝐒𝐄𝐑𝐁𝐎𝐓](https://t.me/Shukla_op_clone1bot)\n\nⰆ ᴄʟᴏɴᴇ ʏᴏᴜʀ ᴘʏʀᴏɢʀᴀᴍ sᴇssɪᴏɴ & ᴇɴᴊᴏʏ")
+    await message.edit("Ⰶ ʜᴇʀᴇ ɪs ғʀᴇᴇ sᴛʀᴀɴɢᴇʀ ᴜsᴇʀʙᴏᴛ ʜᴏsᴛᴇʀ: \n\n[𝐒𝐓𝐑𝐀𝐍𝐆𝐄𝐑 𝐔𝐒𝐄𝐑𝐁𝐎𝐓](https://t.me/StrangerUBbot)\n\nⰆ ᴄʟᴏɴᴇ ʏᴏᴜʀ ᴘʏʀᴏɢʀᴀᴍ sᴇssɪᴏɴ & ᴇɴᴊᴏʏ")
 
 
 @Client.on_message(filters.command("creator", ".") & filters.me)
