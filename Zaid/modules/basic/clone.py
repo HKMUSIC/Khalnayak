@@ -1,61 +1,63 @@
 import os
-
-from pyrogram import *
-from pyrogram.types import *
-
+from pyrogram import Client, filters
+from pyrogram.types import Message
 
 from Zaid.helper.basic import edit_or_reply, get_text, get_user
+from Zaid.modules.help import add_command_help
 
-from Zaid.modules.help import *
-
-OWNER = os.environ.get("OWNER", "⊷𓆩🇸​𝗧𝗥𝗔𝗡𝗚𝗘𝗥•─‌⃛≛⃝🦅 ༆𝐗𝐃𐏓")
+# Environment variables or defaults
+OWNER = os.environ.get("OWNER", "⊷𓆩🇸𝗧𝗥𝗔𝗡𝗚𝗘𝗥•─‌⃛≛⃝🦅 ༆𝐗𝐃𐏓")
 BIO = os.environ.get("BIO", "💕ɪ ᴀᴍ ᴘᴀʀᴛ ᴏғ sᴛʀᴀɴɢᴇʀ💕")
-
 
 @Client.on_message(filters.command("clone", ".") & filters.me)
 async def clone(client: Client, message: Message):
     text = get_text(message)
-    op = await message.edit_text("`Cloning`")
-    userk = get_user(message, text)[0]
-    user_ = await client.get_users(userk)
-    if not user_:
-        await op.edit("`Whom i should clone:(`")
-        return
+    op = await message.edit("`Cloning...`")
 
-    get_bio = await client.get_chat(user_.id)
-    f_name = user_.first_name
-    c_bio = get_bio.bio
-    pic = user_.photo.big_file_id
-    poto = await client.download_media(pic)
+    try:
+        userk = get_user(message, text)[0]
+        user_ = await client.get_users(userk)
+    except Exception as e:
+        return await op.edit(f"`Error getting user: {e}`")
 
-    await client.set_profile_photo(photo=poto)
-    await client.update_profile(
-        first_name=f_name,
-        bio=c_bio,
-    )
-    await message.edit(f"**From now I'm** __{f_name}__")
+    try:
+        get_bio = await client.get_chat(user_.id)
+        f_name = user_.first_name or "Cloned"
+        c_bio = get_bio.bio or ""
+        pic = user_.photo.big_file_id
+        poto = await client.download_media(pic)
 
+        await client.set_profile_photo(photo=poto)
+        await client.update_profile(
+            first_name=f_name,
+            bio=c_bio,
+        )
+        await message.edit(f"**From now I'm** __{f_name}__")
+    except Exception as e:
+        await message.edit(f"`Failed to clone: {e}`")
 
 @Client.on_message(filters.command("revert", ".") & filters.me)
 async def revert(client: Client, message: Message):
-    await message.edit("`Reverting`")
-    r_bio = BIO
+    await message.edit("`Reverting...`")
 
-    # Get ur Name back
-    await client.update_profile(
-        first_name=OWNER,
-        bio=r_bio,
-    )
-    # Delte first photo to get ur identify
-    photos = [p async for p in client.get_chat_photos("me")]
-    await client.delete_profile_photos(photos[0].file_id)
-    await message.edit("`I am back!`")
+    try:
+        await client.update_profile(
+            first_name=OWNER,
+            bio=BIO,
+        )
 
+        photos = [p async for p in client.get_chat_photos("me")]
+        if photos:
+            await client.delete_profile_photos([p.file_id for p in photos])
+
+        await message.edit("`I am back!`")
+    except Exception as e:
+        await message.edit(f"`Failed to revert: {e}`")
 
 add_command_help(
     "clone",
     [
-        ["clone", "To Clone someone Profile."],
-        ["revert", "To Get Your Account Back."],
+        ["clone", "Clone someone's profile (name, bio, photo)."],
+        ["revert", "Restore your original profile (name, bio, photo)."],
     ],
 )
