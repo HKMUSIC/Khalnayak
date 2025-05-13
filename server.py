@@ -1,13 +1,31 @@
 import os
+import threading
+import time
+import requests
 from flask import Flask
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
 api = Api(app)
 
-class Greeting (Resource):
+class Greeting(Resource):
     def get(self):
-        return "Zaid Userbot is Up & Running!"
+        return {"message": "Stranger Userbot is Up & Running!"}
 
 api.add_resource(Greeting, '/')
-app.run(host="0.0.0.0", port=os.environ.get("PORT", 8080))
+
+def keep_alive():
+    while True:
+        try:
+            url = "https://userbot-f26n.onrender.com/"
+            print(f"Pinging {url}")
+            requests.get(url)
+        except Exception as e:
+            print(f"Failed to ping: {e}")
+        time.sleep(600) 
+
+threading.Thread(target=keep_alive, daemon=True).start()
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
