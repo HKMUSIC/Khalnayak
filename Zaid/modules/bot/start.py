@@ -16,17 +16,17 @@ PHONE_NUMBER_TEXT = (
 async def hello(client: app, message):
     buttons = [
               [
-                  InlineKeyboardButton(text="▪️sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ▪️", url="https://t.me/StringSesssionGeneratorRobot"),
+                  InlineKeyboardButton(text="sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot"),
               ],
               [
-                  InlineKeyboardButton(text="▪️ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ▪️", url="https://t.me/StrangerAssociation/539"),
+                  InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539"),
               ],
               [
-                  InlineKeyboardButton("▪️sᴜᴘᴘᴏʀᴛ▪️", url="https://t.me/MASTIWITHFRIENDSXD"),
-                  InlineKeyboardButton("▪️ᴜᴘᴅᴀᴛᴇ▪️", url="https://t.me/StrangerAssociation"),
+                  InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
+                  InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation"),
               ],
               [
-                  InlineKeyboardButton("▪️sʜɪᴠàɴsʜ-xᴅ▪️", url="https://t.me/ITSZ_SHIVANSH"),
+                  InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH"),
               ],
               ]
     reply_markup = InlineKeyboardMarkup(buttons)
