@@ -20,7 +20,7 @@ prettytable
 git+https://github.com/Itz-fork/py-trans.git
 reportlab
 svglib
-sqlite3
+#sqlite3
 speedtest-cli==2.1.3
 tgcrypto 
 telegraph
