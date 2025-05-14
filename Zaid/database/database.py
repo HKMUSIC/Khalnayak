@@ -1,5 +1,6 @@
 import aiosqlite
 import asyncio
+from Zaid.database import cli
 
 DB_PATH = "sessions.db"
 TABLE_NAME = "sessions"
