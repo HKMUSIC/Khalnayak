@@ -1,8 +1,10 @@
 from Zaid import app, API_ID, API_HASH
-from config import OWNER_ID
+from config import OWNER_ID, ALIVE_PIC
 from pyrogram import Client, filters
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+import asyncio
 
 user_sessions = {}
 
