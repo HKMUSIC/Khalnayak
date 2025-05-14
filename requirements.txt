@@ -2,6 +2,7 @@ flask
 flask_restful
 aiohttp
 aiofiles
+aiosqlite
 bs4
 googlesearch-python==1.0.1
 gitpython
@@ -19,8 +20,10 @@ prettytable
 git+https://github.com/Itz-fork/py-trans.git
 reportlab
 svglib
+sqlite3
 speedtest-cli==2.1.3
 tgcrypto 
 telegraph
 uwuify
 gtts
+loguru
