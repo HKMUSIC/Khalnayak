@@ -1,4 +1,4 @@
-#import sqlite3
+from typing import Dict, List, Union
 
 def init_db():
     conn = sqlite3.connect("sessions.db")
