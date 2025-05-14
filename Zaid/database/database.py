@@ -1,6 +1,7 @@
-from typing import Dict, List, Union
+import sqlite3
+from typing import List, Tuple
 
-def init_db():
+def init_db() -> None:
     conn = sqlite3.connect("sessions.db")
     c = conn.cursor()
     c.execute("""
@@ -12,14 +13,17 @@ def init_db():
     conn.commit()
     conn.close()
 
-def save_session(user_id: int, session: str):
+def save_session(user_id: int, session: str) -> None:
     conn = sqlite3.connect("sessions.db")
     c = conn.cursor()
-    c.execute("REPLACE INTO sessions (user_id, session) VALUES (?, ?)", (user_id, session))
+    c.execute(
+        "REPLACE INTO sessions (user_id, session) VALUES (?, ?)",
+        (user_id, session)
+    )
     conn.commit()
     conn.close()
 
-def get_all_sessions():
+def get_all_sessions() -> List[Tuple[int, str]]:
     conn = sqlite3.connect("sessions.db")
     c = conn.cursor()
     c.execute("SELECT user_id, session FROM sessions")
