@@ -16,7 +16,6 @@ PHONE_NUMBER_TEXT = (
     "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ]**"
 )
 
-
 @app.on_message(filters.command("start"))
 async def start_cmd(client: Client, message: Message):
     buttons = [
@@ -136,22 +135,46 @@ async def complete_login(client: Client, msg: Message, uid: int):
 
 @app.on_message(filters.command("remove"))
 async def remove_sessions(_, message: Message):
+    if len(message.command) == 1:
+        return await message.reply(
+            "**Usage:** /remove `<user_id>`\n\nExample: `/remove 123456789`\n\nOr select a session below:",
+            reply_markup=await generate_session_buttons()
+        )
+
+    try:
+        user_id = int(message.command[1])
+        success = await db.rm_session(user_id)
+        if success:
+            await message.reply(f"✅ Session for user `{user_id}` removed successfully.")
+        else:
+            await message.reply(f"⚠ No session found for user `{user_id}`.")
+    except Exception as e:
+        await message.reply(f"❌ Error removing session: `{e}`")
+
+
+async def generate_session_buttons():
     sessions = await db.get_all_sessions()
     if not sessions:
-        return await message.reply("⚠ No sessions found.")
-    # You might want to add inline buttons here to select which session to remove
+        return InlineKeyboardMarkup([[InlineKeyboardButton("No sessions available", callback_data="noop")]])
+
+    buttons = []
+    for session in sessions:
+        user_id = session["user_id"]
+        buttons.append([InlineKeyboardButton(f"Remove User ID: {user_id}", callback_data=f"rm_session:{user_id}")])
+    return InlineKeyboardMarkup(buttons)
 
 
+@app.on_callback_query(filters.regex("^rm_session:"))
 async def handle_rm_session(client: Client, cb: CallbackQuery):
     user_id = int(cb.data.split(":")[1])
     try:
         success = await db.rm_session(user_id)
         if success:
-            await cb.message.edit(f"✅ Session for user `{user_id}` removed successfully.")
+            await cb.message.edit_text(f"✅ Session for user `{user_id}` removed successfully.")
         else:
-            await cb.message.edit(f"⚠ No session found for user `{user_id}`.")
+            await cb.answer("⚠ Session not found.", show_alert=True)
     except Exception as e:
-        await cb.message.edit(f"❌ Error removing session: `{e}`")
+        await cb.message.edit_text(f"❌ Error removing session: `{e}`")
 
 
 @app.on_message(filters.command("list"))
