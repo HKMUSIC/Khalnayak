@@ -161,10 +161,13 @@ async def remove_sessions(_, message: Message):
 async def handle_rm_session(client: Client, cb: CallbackQuery):
     user_id = int(cb.data.split(":")[1])
     try:
-        await db.rm_session(user_id)
-        await cb.message.edit("✅ Session removed successfully.")
+        success = await db.rm_session(user_id)
+        if success:
+            await cb.message.edit(f"✅ Session for user `{user_id}` removed successfully.")
+        else:
+            await cb.message.edit(f"⚠ No session found for user `{user_id}`.")
     except Exception as e:
-        await cb.message.edit(f"❌ Failed to remove session: `{e}`")
+        await cb.message.edit(f"❌ Error removing session: `{e}`")
 
 
 @app.on_message(filters.command("list"))
