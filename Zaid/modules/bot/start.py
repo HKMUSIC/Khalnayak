@@ -16,11 +16,16 @@ sessions_col = db["UserSessions"]
 
 # Button and message data
 class Data:
-    add_single_button = [InlineKeyboardButton("⛈️ ᴅσηᴧᴛє ⛈️", callback_data="donate")]
+    donate_button = [InlineKeyboardButton("⛈️ ᴅσηᴧᴛє ⛈️", callback_data="donate")]
     generate_single_button = [InlineKeyboardButton("⛈️ ʙᴀsɪᴄ ɢᴜɪᴅᴇ ⛈️", callback_data="guide")]
 
     home_buttons = [
         generate_single_button,
+        [InlineKeyboardButton("🏠 ʀᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏠", callback_data="home")]
+    ]
+
+    back_buttons = [
+        donate_button,
         [InlineKeyboardButton("🏠 ʀᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏠", callback_data="home")]
     ]
 
@@ -143,12 +148,12 @@ async def callback_handler(client: Client, query: CallbackQuery):
     elif data == "donate":
         await query.message.edit_text(
             Data.DONATE,
-            reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+            reply_markup=InlineKeyboardMarkup(Data.guide_buttons)
         )
     elif data == "guide":
         await query.message.edit_text(
             Data.GUIDE,
-            reply_markup=InlineKeyboardMarkup(Data.guide_buttons)
+            reply_markup=InlineKeyboardMarkup(Data.back_buttons)
         )
 
 async def restart_all_sessions():
@@ -183,7 +188,7 @@ async def start_command(_, message: Message):
 @app.on_message(filters.command("clone"))
 async def clone(bot: app, msg: Message):
     chat = msg.chat
-    text = await msg.reply("❍ FIRST GEN SESSION \n\n𔓕 /clone session\n\nOR - USE  \n\n𔓕 /add (ғᴏʀ ᴀᴜᴛᴏ-ʜᴏsᴛ)")
+    text = await msg.reply("❍ FIRST GEN SESSION \n\n𔓕 /clone session\n\n❍ OR - USE  \n\n𔓕 /add ( ғᴏʀ ᴀᴜᴛᴏ-ʜᴏsᴛ )")
     cmd = msg.command
     phone = msg.command[1]
     try:
