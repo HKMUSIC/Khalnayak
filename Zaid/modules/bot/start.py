@@ -125,6 +125,15 @@ async def callback_handler(client: Client, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(Data.home_buttons)
         )
 
+    elif data == "add":
+        await query.message.reply(
+            "📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):"
+        )
+        user_sessions[user_id] = {"step": "awaiting_phone"}
+
+    await query.answer()
+
+
 async def restart_all_sessions():
     logging.info("ʀᴇsᴛᴀʀᴛɪɴɢ ᴀʟʟ ᴜsᴇʀ's ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs...")
     sessions = sessions_col.find()
