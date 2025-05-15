@@ -170,10 +170,19 @@ async def clone(bot: app, msg: Message):
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
 
+@app.on_callback_query(filters.regex("add"))
+async def add_session_callback(client, callback_query: CallbackQuery):
+    user_id = callback_query.from_user.id
+    await callback_query.message.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
+    user_sessions[user_id] = {"step": "awaiting_phone"}
+    await callback_query.answer()  # to remove loading spinner on button press
+
 @app.on_message(filters.command("add"))
-async def add_session(_, msg: Message):
-    await msg.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
-    user_sessions[msg.from_user.id] = {"step": "awaiting_phone"}
+async def add_session_command(client, message: Message):
+    user_id = message.from_user.id
+    await message.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
+    user_sessions[user_id] = {"step": "awaiting_phone"}
+
 
 @app.on_message(filters.command("remove"))
 async def remove_session(_, msg: Message):
