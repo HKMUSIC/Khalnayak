@@ -1,5 +1,10 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from Zaid.database import cli
+import motor.motor_asyncio
+
+from config import MONGO_URL
+cli = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
+
+dbb = cli.program
 
 class Database:
     def __init__(self, mongo_url: str):
