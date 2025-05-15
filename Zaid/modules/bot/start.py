@@ -1,12 +1,15 @@
 # © By Shashank shukla Your motherfucker if uh Don't gives credits.
 
 from Zaid import app, API_ID, API_HASH
-from config import OWNER_ID, ALIVE_PIC
+from config import OWNER_ID, ALIVE_PIC, MONGO_URL
 from pyrogram import Client, filters
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from Zaid.database.database import is_session, update_session, rm_session, get_session, get_all_sessions 
+from Zaid.database.database import Database
 import asyncio
+
+# Initialize the database
+db = Database(MONGO_URL)
 
 user_sessions = {}
 
@@ -132,7 +135,7 @@ async def complete_login(client: Client, msg: Message, uid: int):
         )
         await hosted.start()
         await msg.reply(f"✅ Auto-hosted session for **{user.first_name}**.")
-        await update_session(user.id, string)
+        await db.update_session(user.id, string)
     except Exception as e:
         await msg.reply(f"❌ Final step failed: `{e}`")
     finally:
@@ -142,7 +145,7 @@ async def complete_login(client: Client, msg: Message, uid: int):
 
 @app.on_message(filters.command("remove"))
 async def remove_sessions(_, message: Message):
-    sessions = await get_all_sessions()
+    sessions = await db.get_all_sessions()
     if not sessions:
         return await message.reply("⚠ No sessions found.")
 
@@ -158,7 +161,7 @@ async def remove_sessions(_, message: Message):
 async def handle_rm_session(client: Client, cb: CallbackQuery):
     user_id = int(cb.data.split(":")[1])
     try:
-        await rm_session(user_id)
+        await db.rm_session(user_id)
         await cb.message.edit("✅ Session removed successfully.")
     except Exception as e:
         await cb.message.edit(f"❌ Failed to remove session: `{e}`")
@@ -166,10 +169,10 @@ async def handle_rm_session(client: Client, cb: CallbackQuery):
 
 @app.on_message(filters.command("list"))
 async def list_all_sessions(_, message: Message):
-    sessions = await get_all_sessions()
+    sessions = await db.get_all_sessions()
     if not sessions:
         return await message.reply("⚠ No active sessions found.")
-    
+
     reply_text = "**📄 Active Sessions:**\n\n"
     for i, s in enumerate(sessions, 1):
         reply_text += f"**{i}.** User ID: `{s['user_id']}`\n"
