@@ -12,7 +12,7 @@ async def start_bot():
 
     # Import modules dynamically
     for all_module in ALL_MODULES:
-        importlib.import_module("Zaid.modules." + all_module)
+        importlib.import_module("Zaid.modules" + all_module)
         print(f"Successfully Imported {all_module} 💥")
 
     # Start all clients
