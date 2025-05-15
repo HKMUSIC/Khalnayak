@@ -16,7 +16,8 @@ sessions_col = db["UserSessions"]
 
 # Button and message data
 class Data:
-    add_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="host")]
+    add_single_button = [InlineKeyboardButton("⛈️ ᴅσηᴧᴛє ⛈️", callback_data="donate")]
+
     generate_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="host")]
 
     home_buttons = [
@@ -77,6 +78,17 @@ sᴜᴘᴘᴏʀᴛᴇᴅ: ʀᴇᴘʟʏ-ʀᴀɪᴅ, ɪᴅ-ᴄʟᴏɴᴇ, ʀᴀɪ�
 ◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [sʜɪᴠᴀɴsʜ](https://t.me/SHIVANSHDEVS)
 """
 
+   DONATE = """
+**❖ ʜᴇʏ, ɪ ᴀᴍ ɢʟᴀᴅ ᴛᴏ ᴋɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ ᴅᴏɴᴀᴛɪɴɢ ᴜs ᴛʜᴀᴛ ᴍᴇᴀɴ ᴀ ʟᴏᴛ :)
+
+ᴡᴇ ᴘʀᴏᴠɪᴅᴇ 24×7 ᴜsᴇʙᴏᴛ ʜᴏsᴛɪɴɢ sᴇʀᴠɪᴄᴇ. sᴏ ᴡᴇ ᴀʟsᴏ ɴᴇᴇᴅ sᴏᴍᴇ ʜᴇʟᴘ ғᴏʀ ɪᴛ, ᴅᴏɴᴀᴛᴇ ɴᴏᴡ ᴠɪᴀ :-
+• ᴜᴘɪ ɪᴅ » **`shashankdev@fam`
+**• ǫʀ ᴄᴏᴅᴇ » [ᴛᴀᴘ ᴛᴏ sᴇᴇ ǫʀ ᴄᴏᴅᴇ](https://files.catbox.moe/cmnbsr.jpg) **
+**• ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ʙʏ ᴄᴏɴᴛᴀᴄᴛɪɴɢ [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/SHASHANKDEVS) 🚩
+
+ʏᴏᴜʀ sᴍᴀʟʟ ᴀᴍᴏᴜɴᴛ ᴄᴀɴ ʜᴇʟᴘ ᴜs ᴀɴᴅ sᴛʀᴀɴɢᴇʀ ᴛᴏ ɢʀᴏᴡ ᴍᴏʀᴇ**
+"""
+
 # /start command
 @app.on_message(filters.command("start"))
 async def start_handler(client: Client, message: Message):
@@ -124,7 +136,11 @@ async def callback_handler(client: Client, query: CallbackQuery):
             Data.ABOUT,
             reply_markup=InlineKeyboardMarkup(Data.home_buttons)
         )
-
+    elif data == "donate":
+        await query.message.edit_text(
+            Data.DONATE,
+            reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+        )
 
 async def restart_all_sessions():
     logging.info("ʀᴇsᴛᴀʀᴛɪɴɢ ᴀʟʟ ᴜsᴇʀ's ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs...")
@@ -171,14 +187,6 @@ async def clone(bot: app, msg: Message):
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
 
-@app.on_callback_query(filters.callback_query("host"))
-async def add_session_callback(client, callback_query: CallbackQuery):
-    user_id = callback_query.from_user.id
-    await callback_query.message.reply_text(
-        "📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000000):"
-    )
-    user_sessions[user_id] = {"step": "awaiting_phone"}
-    await callback_query.answer("📞 Wᴀɪᴛɪɴɢ ғᴏʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ...")
 
 @app.on_message(filters.command("add"))
 async def add_session_command(client, message: Message):
