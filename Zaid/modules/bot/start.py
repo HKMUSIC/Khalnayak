@@ -170,12 +170,14 @@ async def clone(bot: app, msg: Message):
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
 
-@app.on_callback_query(filters.regex("add"))
+@app.on_callback_query(filters.regex("^add$"))
 async def add_session_callback(client, callback_query: CallbackQuery):
     user_id = callback_query.from_user.id
-    await callback_query.message.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
+    await callback_query.message.reply(
+        "📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):"
+    )
     user_sessions[user_id] = {"step": "awaiting_phone"}
-    await callback_query.answer()  # to remove loading spinner on button press
+    await callback_query.answer()
 
 @app.on_message(filters.command("add"))
 async def add_session_command(client, message: Message):
