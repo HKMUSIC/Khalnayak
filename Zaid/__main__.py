@@ -1,7 +1,7 @@
 from Zaid.modules.bot.start import restart_all_sessions
 import asyncio
 import importlib
-from pyrogram import idle
+from pyrogram import Client, idle
 from Zaid.helper import join
 from Zaid.modules import ALL_MODULES
 from Zaid import clients, app, ids
