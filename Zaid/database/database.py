@@ -1,41 +1,40 @@
-import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import MONGO_URL
 
-# MongoDB setup
-cli = AsyncIOMotorClient(MONGO_URL)
-dbb = cli.program  # database
-collection = dbb.sessions  # collection, replacing "sessions" table
+# Connect to MongoDB
+client = AsyncIOMotorClient(MONGO_URL)
+db = client.program  # Database name
+collection = db.sessions  # Collection name for session storage
 
 async def init_db():
-    """MongoDB doesn't require table initialization like SQL, but this can ensure indexes."""
+    """
+    Initializes the sessions collection by ensuring a unique index on user_id.
+    MongoDB automatically creates the collection if it doesn't exist.
+    """
     await collection.create_index("user_id", unique=True)
 
-def save_session(user_id: int, session_string: str):
-    """Saves or updates a user's session string."""
-    asyncio.get_event_loop().run_until_complete(_save_session_async(user_id, session_string))
-
-async def _save_session_async(user_id: int, session_string: str):
+async def save_session(user_id: int, session_string: str):
+    """
+    Saves or updates a session string for a given user_id.
+    If the user already exists, it updates the session.
+    """
     await collection.update_one(
         {"user_id": user_id},
         {"$set": {"session": session_string}},
         upsert=True
     )
 
-def get_all_sessions():
-    """Fetches all stored sessions as (user_id, session) tuples."""
-    return asyncio.get_event_loop().run_until_complete(_get_all_sessions_async())
-
-async def _get_all_sessions_async():
-    cursor = collection.find({})
+async def get_all_sessions():
+    """
+    Returns all stored (user_id, session_string) tuples.
+    """
     sessions = []
-    async for document in cursor:
+    async for document in collection.find({}):
         sessions.append((document["user_id"], document["session"]))
     return sessions
 
-def remove_session(user_id: int):
-    """Removes a user's session by user ID."""
-    return asyncio.get_event_loop().run_until_complete(_remove_session_async(user_id))
-
-async def _remove_session_async(user_id: int):
+async def remove_session(user_id: int):
+    """
+    Deletes the session entry for the specified user_id.
+    """
     await collection.delete_one({"user_id": user_id})
