@@ -13,9 +13,116 @@ mongo_client = MongoClient(MONGO_URL)
 db = mongo_client["SessionDB"]
 sessions_col = db["UserSessions"]
 
-PHONE_NUMBER_TEXT = (
-    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ](https://t.me/StrangerUBbot) **\n**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n**╰─────────────────────────**\n**──────────────────────────**\n**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [ Sᴛʀɪɴɢ Sᴇssɪᴏɴ ]**\n**❖ Hᴏsᴛ Bᴏᴛ : /add [ ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ ]**\n**❖ Rᴇᴍᴏᴠᴇ Bᴏᴛ : /remove [ ʟᴏɢᴏᴜᴛ ғᴏʀᴍ ʙᴏᴛ ]**\n**──────────────────────────**\n**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n**──────────────────────────**"
-)
+Button and message data
+class Data:
+    add_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="add")]
+    generate_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="add")]
+
+    home_buttons = [
+        generate_single_button,
+        [InlineKeyboardButton("🏠 ʀᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏠", callback_data="home")]
+    ]
+
+    generate_button = [generate_single_button]
+
+    buttons = [
+        generate_single_button,
+        [InlineKeyboardButton("🕸️ sᴇssɪᴏɴ ʙᴏᴛ 🕸️", url="https://t.me/StringSesssionGeneratorRobot")],
+        [
+            InlineKeyboardButton("❔ ʜᴏᴡ ᴛᴏ ᴜꜱᴇ", callback_data="help"),
+            InlineKeyboardButton("ᴀʙᴏᴜᴛ 🎶", callback_data="about")
+        ],
+        [
+            InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇ's ", url="https://t.me/Shivansh474"),
+            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ ⛈️️", url="https://t.me/MASTIWITHFRIENDSXD")
+        ],
+        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/SHIVANSHDEVS")],
+    ]
+
+    START = """
+**┌────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞‌‌‌‌★
+┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇʛвσᴛ](https://t.me/StrangerUBbot)
+┆● ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ ! 
+└─────────────────────────•
+❖ ɪ ᴀᴍ ᴀ ᴘᴏᴡᴇʀғᴜʟ ɪᴅ-ᴜsᴇʀ-ʙᴏᴛ
+❖ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ ғᴏʀ ғᴜɴ. 
+❖ ɪ ᴄᴀɴ ʙᴏᴏsᴛ ʏᴏᴜʀ ɪᴅ 
+•─────────────────────────•
+❖ ʙʏ : [sᴛʀᴀɴɢᴇʀ ᴀssᴏᴄɪᴀᴛɪᴏɴ](https://t.me/StrangerAssociation) 🚩**
+"""
+
+    HELP = """
+**ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅꜱ** ⚡
+
+/start - ꜱᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ
+/help - ᴏᴘᴇɴ ʜᴇʟᴘ ᴍᴇɴᴜ
+/about - ᴀʙᴏᴜᴛ ᴛʜᴇ ʙᴏᴛ ᴀɴᴅ ᴏᴡɴᴇʀ
+/add - ᴀᴜᴛᴏ-ʜᴏsᴛ ᴛʜᴇ ʙᴏᴛ
+/clone - ᴄʟᴏɴᴇ ᴠɪᴀ sᴛʀɪɴɢ sᴇssɪᴏɴ
+/remove - ʟᴏɢᴏᴜᴛ ғʀᴏᴍ ʙᴏᴛ
+"""
+
+    ABOUT = """
+**ᴀʙᴏᴜᴛ ᴛʜɪꜱ ʙᴏᴛ** 🌙
+
+ᴛᴇʟᴇɢʀᴀᴍ ʙᴏᴛ ᴛᴏ ʙᴏᴏsᴛ ʏᴏᴜʀ ɪᴅ ᴡɪᴛʜ ʙᴇᴀᴜᴛɪғᴜʟ ᴀɴɪᴍᴀᴛɪᴏɴ.
+
+sᴜᴘᴘᴏʀᴛᴇᴅ: ʀᴇᴘʟʏ-ʀᴀɪᴅ, ɪᴅ-ᴄʟᴏɴᴇ, ʀᴀɪᴅ, sᴘᴀᴍ, ᴜsᴇʀ-ᴛᴀɢɢᴇʀ ʟᴏᴠᴇ-ʀᴀɪᴅ(sʜᴀʀʏɪ) ᴀɴᴅ ᴀʟsᴏ.
+
+◌ ʟᴀɴɢᴜᴀɢᴇ : [ᴘʏᴛʜᴏɴ](https://www.python.org)
+
+◌ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [sʜɪᴠᴀɴsʜ-xᴅ](https://t.me/SHIVANSH474)
+
+◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [sʜɪᴠᴀɴsʜ](https://t.me/SHIVANSHDEVS)
+"""
+
+# /start command
+@app.on_message(filters.command("start"))
+async def start_handler(client: Client, message: Message):
+    reply_markup = InlineKeyboardMarkup(Data.buttons)
+    await client.send_photo(
+        chat_id=message.chat.id,
+        photo=ALIVE_PIC,
+        caption=Data.START,
+        reply_markup=reply_markup
+    )
+
+# /help command
+@app.on_message(filters.command("help"))
+async def help_command(client: Client, message: Message):
+    await message.reply_text(
+        Data.HELP,
+        reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+    )
+
+# /about command
+@app.on_message(filters.command("about"))
+async def about_command(client: Client, message: Message):
+    await message.reply_text(
+        Data.ABOUT,
+        reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+    )
+
+# Callback query handler
+@app.on_callback_query()
+async def callback_handler(client: Client, query: CallbackQuery):
+    data = query.data
+
+    if data == "home":
+        await query.message.edit_media(
+            media=InputMediaPhoto(ALIVE_PIC, caption=Data.START),
+            reply_markup=InlineKeyboardMarkup(Data.buttons)
+        )
+    elif data == "help":
+        await query.message.edit_text(
+            Data.HELP,
+            reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+        )
+    elif data == "about":
+        await query.message.edit_text(
+            Data.ABOUT,
+            reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+        )
 
 async def restart_all_sessions():
     logging.info("ʀᴇsᴛᴀʀᴛɪɴɢ ᴀʟʟ ᴜsᴇʀ's ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs...")
@@ -39,16 +146,12 @@ async def restart_all_sessions():
 
 @app.on_message(filters.command("start"))
 async def start_command(_, message: Message):
-    buttons = [
-        [InlineKeyboardButton("sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
-        [InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
-        [
-            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
-            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation")
-        ],
-        [InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH")]
-    ]
-    await message.reply_photo(ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=InlineKeyboardMarkup(buttons))
+    reply_markup = InlineKeyboardMarkup(Data.buttons)
+    await client.send_photo(
+        chat_id=message.chat.id,
+        photo=ALIVE_PIC,
+        caption=Data.START,
+        reply_markup=reply_markup)
 
 @app.on_message(filters.command("clone"))
 async def clone(bot: app, msg: Message):
