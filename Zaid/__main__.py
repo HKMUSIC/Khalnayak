@@ -1,7 +1,7 @@
 from Zaid.modules.bot.start import restart_all_sessions
 import asyncio
 import importlib
-from pyrogram import Client, idle
+from pyrogram import idle
 from Zaid.helper import join
 from Zaid.modules import ALL_MODULES
 from Zaid import clients, app, ids
@@ -10,10 +10,12 @@ async def start_bot():
     await app.start()
     print("LOG: Founded Bot token. Booting sᴛʀᴀɴɢᴇʀ.")
 
+    # Import modules dynamically
     for all_module in ALL_MODULES:
         importlib.import_module("Zaid.modules." + all_module)
         print(f"Successfully Imported {all_module} 💥")
 
+    # Start all clients
     for cli in clients:
         try:
             await cli.start()
@@ -24,7 +26,7 @@ async def start_bot():
         except Exception as e:
             print(f"Error starting client: {e}")
 
-    # Restart stored user sessions before going idle
+    # Restart all stored sessions before idling
     await restart_all_sessions()
 
     await idle()
