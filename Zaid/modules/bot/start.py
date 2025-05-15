@@ -18,12 +18,14 @@ sessions_col = db["UserSessions"]
 class Data:
     add_single_button = [InlineKeyboardButton("⛈️ ᴅσηᴧᴛє ⛈️", callback_data="donate")]
 
-    generate_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="host")]
+    generate_single_button = [InlineKeyboardButton("⛈️ ʙᴀsɪᴄ ɢᴜɪᴅᴇ ⛈️", callback_data="guide")]
 
     home_buttons = [
         generate_single_button,
         [InlineKeyboardButton("🏠 ʀᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏠", callback_data="home")]
     ]
+
+    guide_buttons =[InlineKeyboardButton("🏠 ʀᴇᴛᴜʀɴ ʜᴏᴍᴇ 🏠", callback_data="home")]
 
     generate_button = [generate_single_button]
 
@@ -62,6 +64,19 @@ class Data:
 /add - ᴀᴜᴛᴏ-ʜᴏsᴛ ᴛʜᴇ ʙᴏᴛ
 /clone - ᴄʟᴏɴᴇ ᴠɪᴀ sᴛʀɪɴɢ sᴇssɪᴏɴ
 /remove - ʟᴏɢᴏᴜᴛ ғʀᴏᴍ ʙᴏᴛ
+"""
+
+   GUIDE = """
+**❖ ʜᴇʏ ᴅᴇᴀʀ ᴛʜɪs ɪs ᴀ ǫᴜɪᴄᴋ ᴀɴᴅ sɪᴍᴘʟᴇ ɢᴜɪᴅᴇ ᴛᴏ ʜᴏsᴛɪɴɢ [sᴛʀᴀɴɢᴇʀ ᴜsᴇʀʙᴏᴛ](https://t.me/StrangerUBbot)
+
+1) sᴇɴᴅ ᴏɴ ᴛʜᴇ /add ᴄᴍᴅ 
+2) sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴏ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ ʟɪᴋᴇ +917800000000.
+3) ᴄʜᴇᴄᴋ ʏᴏᴜʀ ɪᴅ ᴘᴇʀsᴏɴᴀʟ ғᴏʀᴍ ᴛᴇʟᴇɢʀᴀᴍ ᴀɴᴅ ᴄᴏᴘʏ ᴏʀ ʀᴇᴍɪɴᴅ ᴏᴛᴘ ᴀɴᴅ sᴇɴᴅ ᴛʜɪs ʙᴏᴛ sᴘᴀᴄᴇ ʙʏ sᴘᴀᴄᴇ ʟɪᴋᴇ :- 1 2 3 4 5
+
+ɪғ ʏᴏᴜ sᴇᴛ ᴛᴡᴏ sᴛᴇᴘ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴄᴏᴅᴇ ᴏɴ ʏᴏᴜʀ ɪᴅ , ᴛʜᴇɴ sᴇɴᴅ ᴛʜᴀᴛ ᴄᴏᴅᴇ.
+ʏᴏᴜʀ ʙᴏᴛ ᴡɪʟʟ ʙᴇ ʜᴏsᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟ.
+
+ɪғ ʏᴏᴜ sᴛɪʟʟ ғᴀᴄᴇ ᴀɴʏ ɪssᴜᴇs, ғᴇᴇʟ ғʀᴇᴇ ᴛᴏ ʀᴇᴀᴄʜ ᴏᴜᴛ ғᴏʀ sᴜᴘᴘᴏʀᴛ**
 """
 
     ABOUT = """
@@ -140,6 +155,12 @@ async def callback_handler(client: Client, query: CallbackQuery):
         await query.message.edit_text(
             Data.DONATE,
             reply_markup=InlineKeyboardMarkup(Data.home_buttons)
+        )
+    elif data == "guide":
+      elif data == "donate":
+        await query.message.edit_text(
+            Data.GUIDE,
+            reply_markup=InlineKeyboardMarkup(Data.guide_buttons)
         )
 
 async def restart_all_sessions():
