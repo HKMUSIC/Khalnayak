@@ -112,14 +112,14 @@ async def start_handler(client: Client, message: Message):
         reply_markup=InlineKeyboardMarkup(Data.buttons)
     )
 
-@app.on_message(filters.command("help"))
+@app.on_message(filters.command("help") & filters.private)
 async def help_command(client: Client, message: Message):
     await message.reply_text(
         Data.HELP,
         reply_markup=InlineKeyboardMarkup(Data.home_buttons)
     )
 
-@app.on_message(filters.command("about"))
+@app.on_message(filters.command("about") & filters.private)
 async def about_command(client: Client, message: Message):
     await message.reply_text(
         Data.ABOUT,
@@ -176,7 +176,7 @@ async def restart_all_sessions():
         except Exception as e:
             logging.error(f"ғᴀɪʟᴇᴅ ᴛᴏ sᴛᴀʀᴛ sᴇssɪᴏɴ ғᴏʀ ᴜsᴇʀ {uid}: {e}")
 
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("start") & filters.private)
 async def start_command(_, message: Message):
     reply_markup = InlineKeyboardMarkup(Data.buttons)
     await client.send_photo(
@@ -185,7 +185,7 @@ async def start_command(_, message: Message):
         caption=Data.START,
         reply_markup=reply_markup)
 
-@app.on_message(filters.command("clone"))
+@app.on_message(filters.command("clone") & filters.private)
 async def clone(bot: app, msg: Message):
     chat = msg.chat
     text = await msg.reply("❍ FIRST GEN SESSION \n\n𔓕 /clone session\n\n❍ OR - USE  \n\n𔓕 /add ( ғᴏʀ ᴀᴜᴛᴏ-ʜᴏsᴛ )")
@@ -202,14 +202,14 @@ async def clone(bot: app, msg: Message):
         await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
 
 
-@app.on_message(filters.command("add"))
+@app.on_message(filters.command("add") & filters.private)
 async def add_session_command(client, message: Message):
     user_id = message.from_user.id
     await message.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
     user_sessions[user_id] = {"step": "awaiting_phone"}
 
 
-@app.on_message(filters.command("remove"))
+@app.on_message(filters.command("remove") & filters.private)
 async def remove_session(_, msg: Message):
     uid = msg.from_user.id
     session_data = sessions_col.find_one({"_id": uid})
