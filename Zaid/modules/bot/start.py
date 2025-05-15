@@ -5,7 +5,7 @@ from config import OWNER_ID, ALIVE_PIC
 from pyrogram import Client, filters
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from Zaid.database.database import *
+from Zaid.database.database import is_session, update_session, rm_session, get_session, get_all_sessions 
 import asyncio
 
 user_sessions = {}
