@@ -14,22 +14,11 @@ db = mongo_client["SessionDB"]
 sessions_col = db["UserSessions"]
 
 PHONE_NUMBER_TEXT = (
-    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n"
-    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝞮ᴛʀᴀɴɢᴇʀ ꭙ 𝔊sᴇʀвσᴛ](https://t.me/StrangerUBbot) **\n"
-    "**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n"
-    "**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n"
-    "**╰─────────────────────────**\n"
-    "**──────────────────────────**\n"
-    "**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539) **\n"
-    "**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot) **\n"
-    "**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [string]**\n"
-    "**❖ Hᴏsᴛ Bᴏᴛ : /add [ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ]**\n"
-    "**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n"
+    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ](https://t.me/StrangerUBbot) **\n**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n**╰─────────────────────────**\n**──────────────────────────**\n**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [ Sᴛʀɪɴɢ Sᴇssɪᴏɴ ]**\n**❖ Hᴏsᴛ Bᴏᴛ : /add [ ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ ]**\n**❖ Rᴇᴍᴏᴠᴇ Bᴏᴛ : /remove [ ʟᴏɢᴏᴜᴛ ғᴏʀᴍ ʙᴏᴛ ]**\n**──────────────────────────**\n**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n**──────────────────────────**"
 )
 
-# Restart all saved sessions
 async def restart_all_sessions():
-    logging.info("Restarting all user sessions...")
+    logging.info("ʀᴇsᴛᴀʀᴛɪɴɢ ᴀʟʟ ᴜsᴇʀ's ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs...")
     sessions = sessions_col.find()
     for session in sessions:
         try:
@@ -44,9 +33,9 @@ async def restart_all_sessions():
             )
             await client.start()
             active_sessions.append(client)
-            logging.info(f"Started session for user {uid}")
+            logging.info(f"sᴛᴀʀᴛᴇᴅ sᴇssɪᴏɴ ғᴏʀ ᴜsᴇʀ {uid}")
         except Exception as e:
-            logging.error(f"Failed to start session for user {uid}: {e}")
+            logging.error(f"ғᴀɪʟᴇᴅ ᴛᴏ sᴛᴀʀᴛ sᴇssɪᴏɴ ғᴏʀ ᴜsᴇʀ {uid}: {e}")
 
 @app.on_message(filters.command("start"))
 async def start_command(_, message: Message):
@@ -62,21 +51,24 @@ async def start_command(_, message: Message):
     await message.reply_photo(ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=InlineKeyboardMarkup(buttons))
 
 @app.on_message(filters.command("clone"))
-async def clone_session(_, msg: Message):
-    if len(msg.command) < 2:
-        return await msg.reply("❌ Provide a string session after /clone command.")
-    string = msg.command[1]
+async def clone(bot: app, msg: Message):
+    chat = msg.chat
+    text = await msg.reply("❍ FIRST GEN SESSION \n\n𔓕 /clone session\n\nOR - USE  \n\n𔓕 /add (ғᴏʀ ᴀᴜᴛᴏ-ʜᴏsᴛ)")
+    cmd = msg.command
+    phone = msg.command[1]
     try:
-        client = Client(name="Cloner", api_id=API_ID, api_hash=API_HASH, session_string=string)
+        await text.edit("❖ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ᴀ ᴍɪɴᴜᴛᴇ")
+        
+        client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="Zaid/modules"))
         await client.start()
         user = await client.get_me()
-        await msg.reply(f"✅ ʟᴏɢɢᴇᴅ ɪɴ ᴀs {user.first_name}")
+        await msg.reply(f"❖ ɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ʀᴇᴀᴅʏ ᴛᴏ ғɪɢʜᴛ\n\n❍ ʙᴏᴛ sᴜᴄᴄᴇssғᴜʟʟʏ ᴀᴅᴅᴇᴅ\n\n❖ {user.first_name}")
     except Exception as e:
-        await msg.reply(f"❌ Error:\n`{e}`")
+        await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
 
 @app.on_message(filters.command("add"))
 async def add_session(_, msg: Message):
-    await msg.reply("📲 Sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ (e.g., +1234567890)")
+    await msg.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000009):")
     user_sessions[msg.from_user.id] = {"step": "awaiting_phone"}
 
 @app.on_message(filters.command("remove"))
@@ -84,8 +76,8 @@ async def remove_session(_, msg: Message):
     uid = msg.from_user.id
     session_data = sessions_col.find_one({"_id": uid})
     if not session_data:
-        return await msg.reply("❌ Nᴏ sᴇssɪᴏɴ ғᴏᴜɴᴅ.")
-    
+        return await msg.reply("❌ ɴᴏ ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴ ғᴏᴜɴᴅ.")
+
     try:
         for client in active_sessions:
             if client.name == f"AutoClone_{uid}":
@@ -93,11 +85,10 @@ async def remove_session(_, msg: Message):
                 active_sessions.remove(client)
                 break
         sessions_col.delete_one({"_id": uid})
-        await msg.reply("✅ Sᴇssɪᴏɴ ʀᴇᴍᴏᴠᴇᴅ.")
+        await msg.reply("✅ ʏᴏᴜʀ sᴇssɪᴏɴ ʀᴇᴍᴏᴠᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ.")
     except Exception as e:
-        await msg.reply(f"⚠️ Error stopping session:\n`{e}`")
+        await msg.reply(f"⚠️ ᴇʀʀᴏʀ ᴛᴏ ʀᴇᴍᴏᴠɪɴɢ sᴇssɪᴏɴ:\n`{e}`")
 
-# Session OTP login flow
 @app.on_message()
 async def session_handler(_, msg: Message):
     uid = msg.from_user.id
@@ -115,9 +106,9 @@ async def session_handler(_, msg: Message):
             sent = await client.send_code(phone)
             session["phone_code_hash"] = sent.phone_code_hash
             session["step"] = "awaiting_otp"
-            await msg.reply("📨 OTP sᴇɴᴛ! Sᴇɴᴅ ɪɴ ғᴏʀᴍᴀᴛ: `1 2 3 4`")
+            await msg.reply("📨 OTP sᴇɴᴛ! ᴘʟᴇᴀsᴇ sᴇɴᴅ ɪɴ ᴛʜɪs ғᴏʀᴍᴀᴛ: `1 2 3 4 5` ( sᴘᴀᴄᴇ ʙʏ sᴘᴀᴄᴇ )")
         except Exception as e:
-            await msg.reply(f"❌ Failed to send code:\n`{e}`")
+            await msg.reply(f"❌ ᴏᴛᴘ ᴡᴀs ᴡʀᴏɴɢ ᴏʀ ᴇxᴘɪʀᴇᴅ :\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
             await client.disconnect()
             user_sessions.pop(uid, None)
 
@@ -128,9 +119,9 @@ async def session_handler(_, msg: Message):
             await client.sign_in(phone_number=session["phone"], phone_code_hash=session["phone_code_hash"], phone_code=otp)
         except SessionPasswordNeeded:
             session["step"] = "awaiting_2fa"
-            return await msg.reply("🔐 Send your 2FA password.")
+            return await msg.reply("🔐 sᴇɴᴅ ʏᴏᴜʀ 2FA ᴘᴀssᴡᴏʀᴅ.")
         except Exception as e:
-            await msg.reply(f"❌ Failed to sign in:\n`{e}`")
+            await msg.reply(f"❌ ʏᴏᴜʀ 2FA ᴘᴀssᴡᴏʀᴅ ᴡʀᴏɴɢ ғᴀɪʟᴇᴅ ᴛᴏ sɪɢɴ ɪɴ:\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
             await client.disconnect()
             user_sessions.pop(uid, None)
             return
@@ -143,7 +134,7 @@ async def session_handler(_, msg: Message):
             await client.check_password(password)
             await finalize_login(client, msg, uid)
         except Exception as e:
-            await msg.reply(f"❌ Incorrect password:\n`{e}`")
+            await msg.reply(f"❌ ɪɴᴄᴏʀʀᴇᴄᴛ ᴘᴀssᴡᴏʀᴅ:\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
             await client.disconnect()
             user_sessions.pop(uid, None)
 
@@ -173,9 +164,9 @@ async def finalize_login(client: Client, msg: Message, uid: int):
         await hosted.start()
         active_sessions.append(hosted)
 
-        await msg.reply(f"✅ Logged in as **{user.first_name}**\n🔐 Session:\n`{string}`")
+        await msg.reply(f"✅ ʟᴏɢɢᴇᴅ ɪɴ ᴀs **{user.first_name}**.\n\n🔐 sᴇssɪᴏɴ sᴛʀɪɴɢ:\n\n`{string}`\n\nᴀᴜᴛᴏ-ʜᴏsᴛ ɴᴏᴡ..\n\n|| 🔪ᴛᴏ ʙᴏᴛ ғʀᴏᴍ ʏᴏᴜʀ ɪᴅ sᴇɴᴅ ᴛʜɪs ᴄᴍᴅ  /remove .... ||")
     except Exception as e:
-        await msg.reply(f"❌ Final step failed:\n`{e}`")
+        await msg.reply(f"❌ ғɪɴᴀʟ sᴛᴇᴘ ғᴀɪʟᴇᴅ \nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
     finally:
         await client.disconnect()
         user_sessions.pop(uid, None)
