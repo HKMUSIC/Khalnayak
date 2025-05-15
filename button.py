@@ -2,7 +2,7 @@ from pyrogram.types import InlineKeyboardButton
 
 
 class Data:
-    generate_single_button = [InlineKeyboardButton("⛈️ ꜱᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ꜱᴇꜱꜱɪᴏɴ ⛈️", callback_data="generate")]
+    add_single_button = [InlineKeyboardButton("⛈️ ꜱᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ꜱᴇꜱꜱɪᴏɴ ⛈️", callback_data="add")]
 
     home_buttons = [
         generate_single_button,
