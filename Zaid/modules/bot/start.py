@@ -1,63 +1,51 @@
 # © By Shashank shukla Your motherfucker if uh Don't gives credits.
-from Zaid import app, API_ID, API_HASH
-from config import OWNER_ID, ALIVE_PIC
+import asyncio
+import aiosqlite
 from pyrogram import Client, filters
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from Zaid.database.database import init_db, save_session, get_all_sessions, remove_session
-import asyncio
-import aiosqlite
+
+from Zaid import app, API_ID, API_HASH
+from config import OWNER_ID, ALIVE_PIC
+from Zaid.database.database import init_db, save_session, get_all_sessions
 
 user_sessions = {}
 
-init_db()  # Initialize DB
-
-# Restore sessions on bot start
-async def restore_sessions():
-    sessions = get_all_sessions()
-    for uid, session in sessions:
-        try:
-            client = Client(
-                name=f"AutoClone_{uid}",
-                api_id=API_ID,
-                api_hash=API_HASH,
-                session_string=session,
-                plugins=dict(root="Zaid/modules")
-            )
-            await client.start()
-            print(f"[+] Restored session for user {uid}")
-        except Exception as e:
-            print(f"[!] Failed to restore session for {uid}: {e}")
-
-app.start()
-asyncio.get_event_loop().run_until_complete(restore_sessions())
-
 PHONE_NUMBER_TEXT = (
-    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ](https://t.me/StrangerUBbot) **\n**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n**╰─────────────────────────**\n**──────────────────────────**\n**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539) **\n**──────────────────────────**\n**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot) **\n**──────────────────────────**\n**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [ Sᴛʀɪɴɢ Sᴇssɪᴏɴ ]**\n**❖ Hᴏsᴛ Bᴏᴛ : /add [ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ]**\n**──────────────────────────**\n**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n**──────────────────────────**"
+    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n"
+    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ](https://t.me/StrangerUBbot) **\n"
+    "**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n"
+    "**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n"
+    "**╰─────────────────────────**\n"
+    "**──────────────────────────**\n"
+    "**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539) **\n"
+    "**──────────────────────────**\n"
+    "**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot) **\n"
+    "**──────────────────────────**\n"
+    "**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [ Sᴛʀɪɴɢ Sᴇssɪᴏɴ ]**\n"
+    "**❖ Hᴏsᴛ Bᴏᴛ : /add [ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ]**\n"
+    "**──────────────────────────**\n"
+    "**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n"
+    "**──────────────────────────**"
 )
 
+
 @app.on_message(filters.command("start"))
-async def hello(client: app, message):
+async def hello(client: Client, message: Message):
     buttons = [
-              [
-                  InlineKeyboardButton(text="sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot"),
-              ],
-              [
-                  InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539"),
-              ],
-              [
-                  InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
-                  InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation"),
-              ],
-              [
-                  InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH"),
-              ],
-              ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await client.send_photo(message.chat.id, ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=reply_markup)
+        [InlineKeyboardButton("sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
+        [InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
+        [
+            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
+            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation"),
+        ],
+        [InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH")],
+    ]
+    await message.reply_photo(ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=InlineKeyboardMarkup(buttons))
+
 
 @app.on_message(filters.command("clone"))
-async def clone_session(client: app, msg: Message):
+async def clone_session(client: Client, msg: Message):
     if len(msg.command) < 2:
         await msg.reply("❌ ᴜsᴀɢᴇ: `/clone <string session>`", quote=True)
         return
@@ -77,10 +65,12 @@ async def clone_session(client: app, msg: Message):
     except Exception as e:
         await msg.reply(f"❌ ᴇʀʀᴏʀ:\n`{e}`")
 
+
 @app.on_message(filters.command("add"))
 async def add_session_cmd(_, msg: Message):
     await msg.reply("📲 sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +9123456789):")
     user_sessions[msg.from_user.id] = {"step": "awaiting_phone"}
+
 
 @app.on_message()
 async def handle_flow(_, msg: Message):
@@ -143,6 +133,7 @@ async def handle_flow(_, msg: Message):
 
         await complete_login(client, msg, uid)
 
+
 async def complete_login(client: Client, msg: Message, uid: int):
     try:
         string = await client.export_session_string()
@@ -164,6 +155,7 @@ async def complete_login(client: Client, msg: Message, uid: int):
     finally:
         await client.disconnect()
         user_sessions.pop(uid, None)
+
 
 @app.on_message(filters.command("remove"))
 async def remove_session(_, msg: Message):
@@ -193,3 +185,34 @@ async def remove_session(_, msg: Message):
         await db.execute(f"DELETE FROM {table} WHERE user_id = ?", (uid,))
         await db.commit()
         await msg.reply("✅ sᴇssɪᴏɴ ʀᴇᴍᴏᴠᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ.")
+
+
+# ==== Entry Point ====
+
+async def restore_sessions():
+    sessions = await get_all_sessions()
+    for uid, session in sessions:
+        try:
+            client = Client(
+                name=f"AutoClone_{uid}",
+                api_id=API_ID,
+                api_hash=API_HASH,
+                session_string=session,
+                plugins=dict(root="Zaid/modules")
+            )
+            await client.start()
+            print(f"[+] Restored session for user {uid}")
+        except Exception as e:
+            print(f"[!] Failed to restore session for {uid}: {e}")
+
+
+async def main():
+    await init_db()
+    await restore_sessions()
+    await app.start()
+    print("✅ Bot started and sessions restored.")
+    await asyncio.Event().wait()  # Keeps the bot running
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
