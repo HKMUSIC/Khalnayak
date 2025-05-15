@@ -5,6 +5,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
 from config import OWNER_ID, ALIVE_PIC, MONGO_URL
 from Zaid import app, API_ID, API_HASH
+from pyrogram.types import CallbackQuery, InputMediaPhoto
 
 user_sessions = {}
 active_sessions = []
@@ -13,7 +14,7 @@ mongo_client = MongoClient(MONGO_URL)
 db = mongo_client["SessionDB"]
 sessions_col = db["UserSessions"]
 
-Button and message data
+# Button and message data
 class Data:
     add_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="add")]
     generate_single_button = [InlineKeyboardButton("⛈️ ʜᴏsᴛ ᴏɴ ʏᴏᴜʀ ɪᴅ ⛈️", callback_data="add")]
