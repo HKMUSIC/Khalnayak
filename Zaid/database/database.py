@@ -1,6 +1,11 @@
 import aiosqlite
 import asyncio
-from Zaid.database import cli
+import motor.motor_asyncio
+
+from config import MONGO_URL
+cli = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
+
+dbb = cli.program
 
 DB_PATH = "sessions.db"
 TABLE_NAME = "sessions"
