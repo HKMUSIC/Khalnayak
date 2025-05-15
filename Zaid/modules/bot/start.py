@@ -1,12 +1,14 @@
-from Zaid import app, API_ID, API_HASH
-from config import OWNER_ID, ALIVE_PIC, MONGO_URL
+import logging
+import asyncio
 from pyrogram import Client, filters
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
-import asyncio
+from Zaid import app, API_ID, API_HASH
+from config import OWNER_ID, ALIVE_PIC, MONGO_URL
 
 user_sessions = {}
+active_sessions = []
 
 mongo_client = MongoClient(MONGO_URL)
 db = mongo_client["SessionDB"]
@@ -14,47 +16,64 @@ sessions_col = db["UserSessions"]
 
 PHONE_NUMBER_TEXT = (
     "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n"
-    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [\u1d5eᴛʀᴀɴɢᴇʀ ꭙ \ud835\udd0asᴇꝛвσᴛ](https://t.me/StrangerUBbot) **\n"
+    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [ᴛʀᴀɴɢᴇʀ ꭙ ѕᴇʀвσᴛ](https://t.me/StrangerUBbot)**\n"
     "**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n"
     "**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n"
     "**╰─────────────────────────**\n"
     "**──────────────────────────**\n"
-    "**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539) **\n"
-    "**──────────────────────────**\n"
-    "**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot) **\n"
-    "**──────────────────────────**\n"
-    "**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [ Sᴛʀɪɴɢ Sᴇssɪᴏɴ ]**\n"
+    "**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539)**\n"
+    "**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot)**\n"
+    "**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [Sᴛʀɪɴɢ Sᴇssɪᴏɴ]**\n"
     "**❖ Hᴏsᴛ Bᴏᴛ : /add [ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ]**\n"
-    "**──────────────────────────**\n"
-    "**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞  [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474) **\n"
-    "**──────────────────────────**"
+    "**❖ Uᴘᴅᴀᴛᴇ ⏤͟͟͞͞ [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474)**\n"
 )
 
+async def restart_all_sessions():
+    logging.info("Restarting all user sessions...")
+    sessions = sessions_col.find()
+    for session in sessions:
+        try:
+            uid = session['user_id']
+            string = session['session']
+            client = Client(
+                name=f"AutoClone_{uid}",
+                api_id=API_ID,
+                api_hash=API_HASH,
+                session_string=string,
+                plugins=dict(root="Zaid/modules")
+            )
+            await client.start()
+            active_sessions.append(client)
+            logging.info(f"Started session for user {uid}")
+        except Exception as e:
+            logging.error(f"Failed to start session for user {uid}: {e}")
+
 @app.on_message(filters.command("start"))
-async def hello(client: app, message):
+async def hello(client: Client, message: Message):
     buttons = [
-        [InlineKeyboardButton(text="sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
-        [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
+        [InlineKeyboardButton("sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
+        [InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
         [
             InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
             InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation")
         ],
         [InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH")],
     ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await client.send_photo(message.chat.id, ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=reply_markup)
+    await client.send_photo(message.chat.id, ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=InlineKeyboardMarkup(buttons))
 
 @app.on_message(filters.command("clone"))
-async def clone(bot: app, msg: Message):
+async def clone(bot: Client, msg: Message):
+    if len(msg.command) < 2:
+        return await msg.reply("❌ Please provide a session string: `/clone <SESSION>`")
     try:
         phone = msg.command[1]
         await msg.reply("❖ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ᴀ ᴍɪɴᴜᴛᴇ")
-        client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="Zaid/modules"))
+        client = Client("Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="Zaid/modules"))
         await client.start()
         user = await client.get_me()
-        await msg.reply(f"❖ ɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ʀᴇᴀᴅʏ ᴛᴏ ғɪɢʜᴛ\n\n❍ [❖ │ sᴛʀᴀɴɢᴇʀ ꭙ ʙᴏᴛ │ ❖](https://t.me/SHIVANSH474)\n\n❖ {user.first_name}")
+        await msg.reply(f"❖ ɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ʀᴇᴀᴅʏ ᴛᴏ ғɪɢʜᴛ\n\n❍ [sᴛʀᴀɴɢᴇʀ ꭙ ʙᴏᴛ](https://t.me/SHIVANSH474)\n\n❖ {user.first_name}")
     except Exception as e:
-        await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
+        await msg.reply(f"**ERROR:** `{str(e)}`")
 
 @app.on_message(filters.command("add"))
 async def start_generate(_, msg: Message):
@@ -64,25 +83,29 @@ async def start_generate(_, msg: Message):
 @app.on_message(filters.command("remove"))
 async def remove_session(_, msg: Message):
     uid = msg.from_user.id
-    session_data = sessions_col.find_one({"_id": uid})
+    session = sessions_col.find_one({"_id": uid})
+    if session:
+        try:
+            temp_client = Client(
+                name=f"TempRemove_{uid}",
+                api_id=API_ID,
+                api_hash=API_HASH,
+                session_string=session["session"]
+            )
+            await temp_client.start()
+            await temp_client.stop()
+        except Exception as e:
+            await msg.reply(f"⚠️ Fᴀɪʟᴇᴅ ᴛᴏ sᴛᴏᴘ sᴇssɪᴏɴ:\n`{e}`")
 
-    if not session_data:
-        return await msg.reply("❌ ɴᴏ ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴ ғᴏᴜɴᴅ.")
-
-    try:
-        temp_client = Client(
-            name=f"TempRemove_{uid}",
-            api_id=API_ID,
-            api_hash=API_HASH,
-            session_string=session_data["session"]
-        )
-        await temp_client.start()
-        await temp_client.stop()
-    except Exception as e:
-        await msg.reply(f"⚠️ Fᴀɪʟᴇᴅ ᴛᴏ sᴛᴏᴘ sᴇssɪᴏɴ:\n`{e}`")
-
-    sessions_col.delete_one({"_id": uid})
-    await msg.reply("✅ ʏᴏᴜʀ sᴇssɪᴏɴ ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ.")
+        sessions_col.delete_one({"_id": uid})
+        for client in active_sessions:
+            if client.name == f"AutoClone_{uid}":
+                await client.stop()
+                active_sessions.remove(client)
+                break
+        await msg.reply("✅ ʏᴏᴜʀ sᴇssɪᴏɴ ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ.")
+    else:
+        await msg.reply("❌ Nᴏ sᴇssɪᴏɴ ғᴏᴜɴᴅ ᴛᴏ ʀᴇᴍᴏᴠᴇ.")
 
 @app.on_message()
 async def session_flow(_, msg: Message):
@@ -95,7 +118,7 @@ async def session_flow(_, msg: Message):
 
     if step == "awaiting_phone":
         phone = msg.text.strip()
-        client = Client(name=f"gen_session_{uid}", api_id=API_ID, api_hash=API_HASH, in_memory=True)
+        client = Client(f"gen_session_{uid}", api_id=API_ID, api_hash=API_HASH, in_memory=True)
         session.update({"phone": phone, "client": client})
 
         try:
@@ -113,11 +136,7 @@ async def session_flow(_, msg: Message):
         otp = msg.text.strip()
         client = session["client"]
         try:
-            await client.sign_in(
-                phone_number=session["phone"],
-                phone_code_hash=session["phone_code_hash"],
-                phone_code=otp
-            )
+            await client.sign_in(phone_number=session["phone"], phone_code_hash=session["phone_code_hash"], phone_code=otp)
         except SessionPasswordNeeded:
             session["step"] = "awaiting_2fa"
             await msg.reply("🔐 Sᴇɴᴅ ʏᴏᴜʀ 2FA ᴘᴀssᴡᴏʀᴅ.")
@@ -127,7 +146,6 @@ async def session_flow(_, msg: Message):
             await client.disconnect()
             user_sessions.pop(uid, None)
             return
-
         await complete_login(client, msg, uid)
 
     elif step == "awaiting_2fa":
@@ -140,14 +158,12 @@ async def session_flow(_, msg: Message):
             await client.disconnect()
             user_sessions.pop(uid, None)
             return
-
         await complete_login(client, msg, uid)
 
 async def complete_login(client: Client, msg: Message, uid: int):
     try:
         string = await client.export_session_string()
         user = await client.get_me()
-
         sessions_col.update_one(
             {"_id": uid},
             {"$set": {
@@ -158,7 +174,6 @@ async def complete_login(client: Client, msg: Message, uid: int):
             }},
             upsert=True
         )
-
         await msg.reply(
             f"✅ ʟᴏɢɢᴇᴅ ɪɴ ᴀs **{user.first_name}**.\n"
             f"🔐 sᴇssɪᴏɴ:\n`{string}`\n\nᴀᴜᴛᴏ-ʜᴏsᴛɪɴɢ..."
@@ -172,9 +187,16 @@ async def complete_login(client: Client, msg: Message, uid: int):
             plugins=dict(root="Zaid/modules")
         )
         await hosted.start()
+        active_sessions.append(hosted)
         await msg.reply(f"✅ ᴀᴜᴛᴏ-ʜᴏsᴛᴇᴅ **{user.first_name}**")
     except Exception as e:
         await msg.reply(f"❌ ғɪɴᴀʟ sᴛᴇᴘ ғᴀɪʟᴇᴅ:\n`{e}`")
     finally:
         await client.disconnect()
         user_sessions.pop(uid, None)
+
+# Run session restarts at startup
+async def on_startup():
+    await restart_all_sessions()
+
+app.add_task(on_startup())
