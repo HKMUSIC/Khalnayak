@@ -125,99 +125,6 @@ async def callback_handler(client: Client, query: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(Data.home_buttons)
         )
 
-#Handler for the "host" inline button callback
-
-@app.on_callback_query(filters.regex("^host$"))
-async def add_session_callback(client, callback_query: CallbackQuery):
-    user_id = callback_query.from_user.id
-    await callback_query.message.reply_text(
-        "📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000000):"
-    )
-    user_sessions[user_id] = {"step": "awaiting_phone"}
-    await callback_query.answer()
-
-# Message handler for phone number input after "host"
-@app.on_message()
-async def session_handler(_, msg: Message):
-    uid = msg.from_user.id
-    session = user_sessions.get(uid)
-    if not session:
-        return
-
-    step = session.get("step")
-    if step == "awaiting_phone":
-        phone = msg.text.strip()
-        client = Client(name=f"gen_{uid}", api_id=API_ID, api_hash=API_HASH, in_memory=True)
-        session.update({"phone": phone, "client": client})
-        try:
-            await client.connect()
-            sent = await client.send_code(phone)
-            session["phone_code_hash"] = sent.phone_code_hash
-            session["step"] = "awaiting_otp"
-            await msg.reply("📨 OTP sᴇɴᴛ! ᴘʟᴇᴀsᴇ sᴇɴᴅ ɪɴ ᴛʜɪs ғᴏʀᴍᴀᴛ: `1 2 3 4 5` ( sᴘᴀᴄᴇ ʙʏ sᴘᴀᴄᴇ )")
-        except Exception as e:
-            await msg.reply(f"❌ ᴏᴛᴘ ᴡᴀs ᴡʀᴏɴɢ ᴏʀ ᴇxᴘɪʀᴇᴅ :\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
-            await client.disconnect()
-            user_sessions.pop(uid, None)
-
-    elif step == "awaiting_otp":
-        otp = msg.text.strip()
-        client = session["client"]
-        try:
-            await client.sign_in(phone_number=session["phone"], phone_code_hash=session["phone_code_hash"], phone_code=otp)
-        except SessionPasswordNeeded:
-            session["step"] = "awaiting_2fa"
-            return await msg.reply("🔐 sᴇɴᴅ ʏᴏᴜʀ 2FA ᴘᴀssᴡᴏʀᴅ.")
-        except Exception as e:
-            await msg.reply(f"❌ ʏᴏᴜʀ 2FA ᴘᴀssᴡᴏʀᴅ ᴡʀᴏɴɢ ғᴀɪʟᴇᴅ ᴛᴏ sɪɢɴ ɪɴ:\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
-            await client.disconnect()
-            user_sessions.pop(uid, None)
-            return
-        await finalize_login(client, msg, uid)
-
-    elif step == "awaiting_2fa":
-        password = msg.text.strip()
-        client = session["client"]
-        try:
-            await client.check_password(password)
-            await finalize_login(client, msg, uid)
-        except Exception as e:
-            await msg.reply(f"❌ ɪɴᴄᴏʀʀᴇᴄᴛ ᴘᴀssᴡᴏʀᴅ:\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
-            await client.disconnect()
-            user_sessions.pop(uid, None)
-
-async def finalize_login(client: Client, msg: Message, uid: int):
-    try:
-        string = await client.export_session_string()
-        user = await client.get_me()
-
-        sessions_col.update_one(
-            {"_id": uid},
-            {"$set": {
-                "session": string,
-                "name": user.first_name,
-                "user_id": user.id,
-                "username": user.username
-            }},
-            upsert=True
-        )
-
-        hosted = Client(
-            name=f"AutoClone_{uid}",
-            api_id=API_ID,
-            api_hash=API_HASH,
-            session_string=string,
-            plugins=dict(root="Zaid/modules")
-        )
-        await hosted.start()
-        active_sessions.append(hosted)
-
-        await msg.reply(f"✅ ʟᴏɢɢᴇᴅ ɪɴ ᴀs **{user.first_name}**.\n\n🔐 sᴇssɪᴏɴ sᴛʀɪɴɢ:\n\n`{string}`\n\nᴀᴜᴛᴏ-ʜᴏsᴛ ɴᴏᴡ..\n\n|| 🔪ᴛᴏ ʙᴏᴛ ғʀᴏᴍ ʏᴏᴜʀ ɪᴅ sᴇɴᴅ ᴛʜɪs ᴄᴍᴅ  /remove .... ||")
-    except Exception as e:
-        await msg.reply(f"❌ ғɪɴᴀʟ sᴛᴇᴘ ғᴀɪʟᴇᴅ \nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴜsᴇ ᴄᴍᴅ /add \n`{e}`")
-    finally:
-        await client.disconnect()
-        user_sessions.pop(uid, None)
 
 async def restart_all_sessions():
     logging.info("ʀᴇsᴛᴀʀᴛɪɴɢ ᴀʟʟ ᴜsᴇʀ's ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs...")
@@ -263,6 +170,15 @@ async def clone(bot: app, msg: Message):
         await msg.reply(f"❖ ɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ʀᴇᴀᴅʏ ᴛᴏ ғɪɢʜᴛ\n\n❍ ʙᴏᴛ sᴜᴄᴄᴇssғᴜʟʟʏ ᴀᴅᴅᴇᴅ\n\n❖ {user.first_name}")
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\n ᴘʀᴇss /start ᴛᴏ sᴛᴀʀᴛ ᴀɢᴀɪɴ.")
+
+@app.on_callback_query(filters.callback_query("host"))
+async def add_session_callback(client, callback_query: CallbackQuery):
+    user_id = callback_query.from_user.id
+    await callback_query.message.reply_text(
+        "📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +918200000000):"
+    )
+    user_sessions[user_id] = {"step": "awaiting_phone"}
+    await callback_query.answer("📞 Wᴀɪᴛɪɴɢ ғᴏʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ...")
 
 @app.on_message(filters.command("add"))
 async def add_session_command(client, message: Message):
