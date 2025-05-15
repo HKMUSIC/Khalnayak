@@ -1,4 +1,4 @@
-# © By Shashank shukla Your motherfucker if uh Don't gives credits.
+# © By Shashank Shukla — Don't forget to credit the author.
 
 from Zaid import app, API_ID, API_HASH
 from config import OWNER_ID, ALIVE_PIC, MONGO_URL
@@ -10,20 +10,12 @@ import asyncio
 
 # Initialize the database
 db = Database(MONGO_URL)
-
 user_sessions = {}
 
 PHONE_NUMBER_TEXT = (
-    "**╭────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞★**\n"
-    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ](https://t.me/StrangerUBbot)**\n"
-    "**┆● Sᴛʀᴀɴɢᴇʀ Bᴏᴛ Vᴇʀsɪᴏɴ :** `2.1.3`\n"
-    "**┊● Pᴏᴡᴇʀғᴜʟ & Usᴇғᴜʟ Usᴇʀʙᴏᴛ**\n"
-    "**❖ Hᴏᴡ Tᴏ Usᴇ Tʜɪs Bᴏᴛ - [Cʟɪᴄᴋ Hᴇʀᴇ](https://t.me/StrangerAssociation/539)**\n"
-    "**❖ Sᴇssɪᴏɴs Gᴇɴ Bᴏᴛ ⁚ [Sᴇssɪᴏɴ-Bᴏᴛ](https://t.me/StringSesssionGeneratorRobot)**\n"
-    "**❖ Cʟᴏɴᴇ Bᴏᴛ  ⁚ /clone [session]**\n"
-    "**❖ Hᴏsᴛ Bᴏᴛ : /add [ᴠɪᴀ ᴘʜᴏɴᴇ ɴᴏ. & ᴏᴛᴘ]**\n"
-    "**❖ Uᴘᴅᴀᴛᴇ : [❖ ∣ Tʜᴇ sᴛʀᴀɴɢᴇʀ ∣ ❖](https://t.me/SHIVANSH474)**"
+    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ]**"
 )
+
 
 @app.on_message(filters.command("start"))
 async def start_cmd(client: Client, message: Message):
@@ -43,20 +35,19 @@ async def start_cmd(client: Client, message: Message):
 async def clone(bot: Client, msg: Message):
     if len(msg.command) < 2:
         return await msg.reply("Usage: /clone <session_string>")
-    phone = msg.command[1]
-    status = await msg.reply("❖ ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ ᴀ ᴍɪɴᴜᴛᴇ")
+    session_string = msg.command[1]
     try:
-        client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="Zaid/modules"))
+        client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=session_string, plugins=dict(root="Zaid/modules"))
         await client.start()
         user = await client.get_me()
-        await msg.reply(f"❖ ɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ʀᴇᴀᴅʏ ᴛᴏ ғɪɢʜᴛ\n\n❍ [❖ │ sᴛʀᴀɴɢᴇʀ ꭙ ʙᴏᴛ │ ❖](https://t.me/SHIVANSH474)\n\n❖ {user.first_name}")
+        await msg.reply(f"❖ Logged in as **{user.first_name}** using the cloned session.")
     except Exception as e:
-        await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
+        await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to try again.")
 
 
 @app.on_message(filters.command("add"))
 async def start_generate(_, msg: Message):
-    await msg.reply("📲 ᴘʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (e.g., +11234567890):")
+    await msg.reply("📲 Please send your phone number in international format (e.g., +11234567890):")
     user_sessions[msg.from_user.id] = {"step": "awaiting_phone"}
 
 
@@ -79,9 +70,9 @@ async def session_flow(_, msg: Message):
             sent = await client.send_code(phone)
             session["phone_code_hash"] = sent.phone_code_hash
             session["step"] = "awaiting_otp"
-            await msg.reply("📨 OTP sᴇɴᴛ! ɴᴏᴡ sᴇɴᴅ ᴛʜᴇ OTP ʟɪᴋᴇ: `1 2 3 4`")
+            await msg.reply("📨 OTP sent! Now send it like: `1 2 3 4`")
         except Exception as e:
-            await msg.reply(f"❌ ғᴀɪʟᴇᴅ ᴛᴏ sᴇɴᴅ ᴄᴏᴅᴇ: `{e}`\nTry /add again.")
+            await msg.reply(f"❌ Failed to send code: `{e}`\nTry /add again.")
             await client.disconnect()
             user_sessions.pop(uid, None)
 
@@ -99,7 +90,7 @@ async def session_flow(_, msg: Message):
             await msg.reply("🔐 2FA enabled. Send your password.")
             return
         except Exception as e:
-            await msg.reply(f"❌ ғᴀɪʟᴇᴅ ᴛᴏ sɪɢɴ ɪɴ: `{e}`\nTry /add again.")
+            await msg.reply(f"❌ Failed to sign in: `{e}`\nTry /add again.")
             await client.disconnect()
             user_sessions.pop(uid, None)
             return
@@ -112,7 +103,7 @@ async def session_flow(_, msg: Message):
         try:
             await client.check_password(password)
         except Exception as e:
-            await msg.reply(f"❌ ɪɴᴄᴏʀʀᴇᴄᴛ ᴘᴀssᴡᴏʀᴅ: `{e}`")
+            await msg.reply(f"❌ Incorrect password: `{e}`")
             await client.disconnect()
             user_sessions.pop(uid, None)
             return
@@ -148,16 +139,9 @@ async def remove_sessions(_, message: Message):
     sessions = await db.get_all_sessions()
     if not sessions:
         return await message.reply("⚠ No sessions found.")
-
-    buttons = [
-        [InlineKeyboardButton(f"Remove {s['user_id']}", callback_data=f"rm_session:{s['user_id']}")]
-        for s in sessions
-    ]
-    buttons.append([InlineKeyboardButton("Cancel ❌", callback_data="auth_close")])
-    await message.reply("Choose a session to delete:", reply_markup=InlineKeyboardMarkup(buttons))
+    # You might want to add inline buttons here to select which session to remove
 
 
-@app.on_callback_query(filters.regex(r"rm_session:(\d+)"))
 async def handle_rm_session(client: Client, cb: CallbackQuery):
     user_id = int(cb.data.split(":")[1])
     try:
