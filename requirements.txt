@@ -2,7 +2,6 @@ flask
 flask_restful
 aiohttp
 aiofiles
-aiosqlite
 bs4
 googlesearch-python==1.0.1
 gitpython
@@ -25,4 +24,3 @@ tgcrypto
 telegraph
 uwuify
 gtts
-loguru
