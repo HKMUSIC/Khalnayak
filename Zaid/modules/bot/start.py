@@ -7,25 +7,30 @@ from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from Zaid.database.database import Database
 import asyncio
+import logging
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO, format="[%(levelname)s] %(asctime)s - %(message)s")
+logger = logging.getLogger(__name__)
 
 # Initialize the database
 db = Database(MONGO_URL)
 user_sessions = {}
 
 PHONE_NUMBER_TEXT = (
-    "**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [𝛅ᴛʀᴀɴɢᴇʀ ꭙ 𝐔sᴇꝛвσᴛ]**"
+    "**┆◙ ʕᴇʏ, ɪ ᴀᴍ : [𝕅ᴛʀᴀɴɢʀ ꞅ  𝕊sᴇẇᴿᴇʀʙᴏᴛ]**"
 )
 
 @app.on_message(filters.command("start"))
 async def start_cmd(client: Client, message: Message):
     buttons = [
-        [InlineKeyboardButton("sᴇssɪᴏɴ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
-        [InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
+        [InlineKeyboardButton("sᴇsᴏʟ ɢᴇɴ ʙᴏᴛ", url="https://t.me/StringSesssionGeneratorRobot")],
+        [InlineKeyboardButton("ʜᴏᴡ ᴛᴏ ᴜᴇ ᴛʜɪᴛ ʙᴏᴛ", url="https://t.me/StrangerAssociation/539")],
         [
-            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url="https://t.me/MASTIWITHFRIENDSXD"),
-            InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation"),
+            InlineKeyboardButton("sᴜᴛᴇʀɿ", url="https://t.me/MASTIWITHFRIENDSXD"),
+            InlineKeyboardButton("ᴜᴛᴅᴀᴛᴇ", url="https://t.me/StrangerAssociation"),
         ],
-        [InlineKeyboardButton("sʜɪᴠàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH")],
+        [InlineKeyboardButton("sʜɪᴡàɴsʜ-xᴅ", url="https://t.me/ITSZ_SHIVANSH")],
     ]
     await message.reply_photo(ALIVE_PIC, caption=PHONE_NUMBER_TEXT, reply_markup=InlineKeyboardMarkup(buttons))
 
@@ -41,6 +46,7 @@ async def clone(bot: Client, msg: Message):
         user = await client.get_me()
         await msg.reply(f"❖ Logged in as **{user.first_name}** using the cloned session.")
     except Exception as e:
+        logger.error(f"Clone error: {e}")
         await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to try again.")
 
 
@@ -71,6 +77,7 @@ async def session_flow(_, msg: Message):
             session["step"] = "awaiting_otp"
             await msg.reply("📨 OTP sent! Now send it like: `1 2 3 4`")
         except Exception as e:
+            logger.error(f"Send code error: {e}")
             await msg.reply(f"❌ Failed to send code: `{e}`\nTry /add again.")
             await client.disconnect()
             user_sessions.pop(uid, None)
@@ -89,6 +96,7 @@ async def session_flow(_, msg: Message):
             await msg.reply("🔐 2FA enabled. Send your password.")
             return
         except Exception as e:
+            logger.error(f"Sign-in error: {e}")
             await msg.reply(f"❌ Failed to sign in: `{e}`\nTry /add again.")
             await client.disconnect()
             user_sessions.pop(uid, None)
@@ -102,6 +110,7 @@ async def session_flow(_, msg: Message):
         try:
             await client.check_password(password)
         except Exception as e:
+            logger.error(f"2FA error: {e}")
             await msg.reply(f"❌ Incorrect password: `{e}`")
             await client.disconnect()
             user_sessions.pop(uid, None)
@@ -127,6 +136,7 @@ async def complete_login(client: Client, msg: Message, uid: int):
         await msg.reply(f"✅ Auto-hosted session for **{user.first_name}**.")
         await db.update_session(user.id, string)
     except Exception as e:
+        logger.error(f"Complete login error: {e}")
         await msg.reply(f"❌ Final step failed: `{e}`")
     finally:
         await client.disconnect()
@@ -149,6 +159,7 @@ async def remove_sessions(_, message: Message):
         else:
             await message.reply(f"⚠ No session found for user `{user_id}`.")
     except Exception as e:
+        logger.error(f"Remove session error: {e}")
         await message.reply(f"❌ Error removing session: `{e}`")
 
 
@@ -174,6 +185,7 @@ async def handle_rm_session(client: Client, cb: CallbackQuery):
         else:
             await cb.answer("⚠ Session not found.", show_alert=True)
     except Exception as e:
+        logger.error(f"Callback remove session error: {e}")
         await cb.message.edit_text(f"❌ Error removing session: `{e}`")
 
 
@@ -188,3 +200,12 @@ async def list_all_sessions(_, message: Message):
         reply_text += f"**{i}.** User ID: `{s['user_id']}`\n"
 
     await message.reply(reply_text)
+
+
+@app.on_message(filters.command("clearall") & filters.user(OWNER_ID))
+async def clear_all_sessions_cmd(_, message: Message):
+    success = await db.clear_all_sessions()
+    if success:
+        await message.reply("✅ All sessions have been removed from the database.")
+    else:
+        await message.reply("❌ Failed to clear sessions.")
