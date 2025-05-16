@@ -2,7 +2,7 @@ import re
 
 Devs = [6762113050, 6919199044]
 Owner = int(6762113050)
-Sudos = int(6919199044)
+Sudos = [6762113050, 6919199044]
 
 def user_errors(error):
     if '[400 USERNAME_NOT_OCCUPIED]' in str(error):
