@@ -2,14 +2,14 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pymongo import MongoClient
+
 from Zaid.helper.basic import edit_or_reply, get_text, get_user
 from Zaid.modules.help import add_command_help
 from config import MONGO_URL
 
-# Environment variables
-OWNER = os.environ.get("OWNER", "{user.first_name}")
-BIO = os.environ.get("BIO", "💕ɪ ᴀᴍ ᴘᴀʀᴛ ᴏғ sᴛʀᴀɴɢᴇʀ💕")
-        
+OWNER = me.first_name
+BIO = bio
+
 # MongoDB setup
 mongo_client = MongoClient(MONGO_URL)
 db = mongo_client["StrangerUB"]
@@ -80,7 +80,6 @@ async def revert(client: Client, message: Message):
             downloaded = await client.download_media(data["photo_id"])
             await client.set_profile_photo(photo=downloaded)
         else:
-            # No saved photo; remove existing
             photos = [p async for p in client.get_chat_photos("me")]
             if photos:
                 await client.delete_profile_photos([p.file_id for p in photos])
