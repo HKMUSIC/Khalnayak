@@ -1,4 +1,6 @@
 import os
+import base64
+import tempfile
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pymongo import MongoClient
@@ -16,7 +18,13 @@ async def save_original_profile(client):
     me = await client.get_me()
     bio = (await client.get_chat("me")).bio
     photos = [p async for p in client.get_chat_photos("me", limit=1)]
-    photo_id = photos[0].file_id if photos else None
+
+    photo_data = None
+    if photos:
+        photo_path = await client.download_media(photos[0].file_id)
+        with open(photo_path, "rb") as f:
+            photo_data = base64.b64encode(f.read()).decode("utf-8")
+        os.remove(photo_path)
 
     profile_collection.update_one(
         {"_id": "original_profile"},
@@ -25,7 +33,7 @@ async def save_original_profile(client):
                 "name": me.first_name,
                 "last_name": me.last_name,
                 "bio": bio,
-                "photo_id": photo_id
+                "photo_data": photo_data
             }
         },
         upsert=True
@@ -82,10 +90,13 @@ async def revert(client: Client, message: Message):
             bio=data["bio"]
         )
 
-        if data.get("photo_id"):
-            downloaded = await client.download_media(data["photo_id"])
-            await client.set_profile_photo(photo=downloaded)
-            os.remove(downloaded)
+        if data.get("photo_data"):
+            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
+            temp_file.write(base64.b64decode(data["photo_data"]))
+            temp_file.close()
+
+            await client.set_profile_photo(photo=temp_file.name)
+            os.remove(temp_file.name)
         else:
             photos = [p async for p in client.get_chat_photos("me")]
             if photos:
