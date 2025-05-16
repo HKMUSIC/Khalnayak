@@ -7,9 +7,6 @@ from Zaid.helper.basic import edit_or_reply, get_text, get_user
 from Zaid.modules.help import add_command_help
 from config import MONGO_URL
 
-OWNER = me.first_name
-BIO = bio
-
 # MongoDB setup
 mongo_client = MongoClient(MONGO_URL)
 db = mongo_client["StrangerUB"]
@@ -23,11 +20,14 @@ async def save_original_profile(client):
 
     profile_collection.update_one(
         {"_id": "original_profile"},
-        {"$set": {
-            "name": me.first_name,
-            "bio": bio,
-            "photo_id": photo_id
-        }},
+        {
+            "$set": {
+                "name": me.first_name,
+                "last_name": me.last_name,
+                "bio": bio,
+                "photo_id": photo_id
+            }
+        },
         upsert=True
     )
 
@@ -52,14 +52,16 @@ async def clone(client: Client, message: Message):
 
         get_bio = await client.get_chat(user_.id)
         f_name = user_.first_name or "Cloned"
+        l_name = user_.last_name or ""
         c_bio = get_bio.bio or ""
 
         if user_.photo:
             pic = user_.photo.big_file_id
             poto = await client.download_media(pic)
             await client.set_profile_photo(photo=poto)
+            os.remove(poto)
 
-        await client.update_profile(first_name=f_name, bio=c_bio)
+        await client.update_profile(first_name=f_name, last_name=l_name, bio=c_bio)
         await op.edit(f"**Now cloning**: [{f_name}](tg://user?id={user_.id})")
 
     except Exception as e:
@@ -74,11 +76,16 @@ async def revert(client: Client, message: Message):
         if not data:
             return await op.edit("`No backup profile data found.`")
 
-        await client.update_profile(first_name=data["name"], bio=data["bio"])
+        await client.update_profile(
+            first_name=data["name"],
+            last_name=data.get("last_name", ""),
+            bio=data["bio"]
+        )
 
         if data.get("photo_id"):
             downloaded = await client.download_media(data["photo_id"])
             await client.set_profile_photo(photo=downloaded)
+            os.remove(downloaded)
         else:
             photos = [p async for p in client.get_chat_photos("me")]
             if photos:
