@@ -3,9 +3,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from Zaid.helper.basic import edit_or_reply, get_text, get_user
 from Zaid.modules.help import add_command_help
-from Zaid.helper.functions import user_only, user_errors, delete_reply  # Ensure these are correctly implemented
+from Zaid.helper.functions import user_only, user_errors, delete_reply  
 
-# Temporary memory-based profile store
 FName = ""
 LName = ""
 Bio = ""
@@ -15,14 +14,13 @@ async def clone_user(client: Client, message: Message):
     global FName, LName, Bio
 
     try:
-        user = await user_only(client, message)
+        user = await user_only(client, message, Owner, Sudos)
         if not user:
             return
     except Exception as er:
         await message.reply(user_errors(er))
         return
 
-    # Store current profile
     me = await client.get_me()
     FName = me.first_name
     LName = me.last_name if me.last_name else ""
@@ -31,11 +29,9 @@ async def clone_user(client: Client, message: Message):
 
     reply_msg = await message.reply("Cloning...")
 
-    # Get target user's bio
     user_chat = await client.get_chat(user.id)
     user_bio = user_chat.bio if user_chat.bio else None
 
-    # Try to download profile photo
     pic = None
     if user.photo:
         try:
@@ -78,7 +74,6 @@ async def _revert(client: Client, message: Message):
 
         await delete_reply(message, reply_msg, "I'm back!")
 
-        # Clear memory
         FName = ""
         LName = ""
         Bio = ""
