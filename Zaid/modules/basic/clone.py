@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from Zaid.helper.basic import edit_or_reply, get_text, get_user
 from Zaid.modules.help import add_command_help
-from Zaid.helper.functions import user_only, user_errors, delete_reply  
+from Zaid.helper.functions import user_only, user_errors, delete_reply, Owner, Devs, Sudos 
 
 FName = ""
 LName = ""
