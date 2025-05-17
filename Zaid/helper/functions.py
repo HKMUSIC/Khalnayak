@@ -6,13 +6,13 @@ Sudos = [6762113050, 6919199044]
 
 def user_errors(error):
     if '[400 USERNAME_NOT_OCCUPIED]' in str(error):
-       return "You didn't provide username"
+       return "ʏᴏᴜ ᴅɪᴅɴ'ᴛ ᴘʀᴏᴠɪᴅᴇ ᴜsᴇʀɴᴀᴍᴇ"
     elif '[400 USERNAME_INVALID]' in str(error):
        return "Username is invalid"
     elif '[400 PEER_ID_INVALID]' in str(error):
-       return "Invalid User ID!"
+       return "ɪɴᴠᴀʟɪᴅ ᴜsᴇʀ ɪᴅ!"
     else:
-       return f"**Unknown Error:** \n\n {error}"
+       return f"**ᴜɴᴋɴᴏᴡɴ ᴇʀʀᴏʀ:** \n\n {error}"
        
        
 async def delete_reply(message, editor, text):
@@ -36,26 +36,26 @@ async def user_only(client, message, Owner, Sudos):
        if user_.isnumeric():
            user_ = int(user_)
        if not user_:
-           await message.reply_text("I don't know who you're talking about, you're going to need to specify a user.!")
+           await message.reply_text("ɪ ᴅᴏɴ'ᴛ ᴋɴᴏᴡ ᴡʜᴏ ʏᴏᴜ'ʀᴇ ᴛᴀʟᴋɪɴɢ ᴀʙᴏᴜᴛ, ʏᴏᴜ'ʀᴇ ɢᴏɪɴɢ ᴛᴏ ɴᴇᴇᴅ ᴛᴏ sᴘᴇᴄɪғʏ ᴀ ᴜsᴇʀ.!")
            return
        try:
            user = await client.get_users(user_)
        except (TypeError, ValueError):
-           await message.reply_text("Looks like I don't have control over that user, or the ID isn't a valid one. If you reply to one of their messages, I'll be able to interact with them.")
+           await message.reply_text("ʟᴏᴏᴋs ʟɪᴋᴇ ɪ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴄᴏɴᴛʀᴏʟ ᴏᴠᴇʀ ᴛʜᴀᴛ ᴜsᴇʀ, ᴏʀ ᴛʜᴇ ɪᴅ ɪsɴ'ᴛ ᴀ ᴠᴀʟɪᴅ ᴏɴᴇ. ɪғ ʏᴏᴜ ʀᴇᴘʟʏ ᴛᴏ ᴏɴᴇ ᴏғ ᴛʜᴇɪʀ ᴍᴇssᴀɢᴇs, ɪ'ʟʟ ʙᴇ ᴀʙʟᴇ ᴛᴏ ɪɴᴛᴇʀᴀᴄᴛ ᴡɪᴛʜ ᴛʜᴇᴍ.")
            return
     else:
-        await message.reply_text("I don't know who you're talking about, you're going to need to specify a user...!")
+        await message.reply_text("ɪ ᴅᴏɴ'ᴛ ᴋɴᴏᴡ ᴡʜᴏ ʏᴏᴜ'ʀᴇ ᴛᴀʟᴋɪɴɢ ᴀʙᴏᴜᴛ, ʏᴏᴜ'ʀᴇ ɢᴏɪɴɢ ᴛᴏ ɴᴇᴇᴅ to sᴘᴇᴄɪғʏ ᴀ ᴜsᴇʀ...!")
         return 
 
     if int(user.id) in Devs:
-        await message.reply_text(f"{user.mention} is Owner/Dev of @SHIVANSHDEVS")
+        await message.reply_text(f"{user.mention} ɪs ᴏᴡɴᴇʀ/ᴅᴇᴠ ᴏғ @SHIVANSHDEVS")
         return
     if int(user.id) == Owner:
-        await message.reply_text(f"{user.mention} is owner of these bots!")
+        await message.reply_text(f"{user.mention} ɪs ᴏᴡɴᴇʀ ᴏғ ᴛʜᴇsᴇ ʙᴏᴛs!")
         return
     if int(user.id) in Sudos:
       if message.from_user.id != Owner:
-         await message.reply_text(f"{user.mention} is Sudo User!")
+         await message.reply_text(f"{user.mention} ɪs sᴜᴅᴏ ᴜsᴇʀ!")
          return
 
     return user
