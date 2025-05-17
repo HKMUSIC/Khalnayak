@@ -2,7 +2,9 @@ import os
 from Zaid.modules.help import add_command_help
 from pyrogram import Client, filters
 
-@Client.on_message(filters.command("op", prefixes=["."]) & filters.private & filters.me)
+COMMANDS = ["op", "wow", "nice", "super"]
+
+@Client.on_message(filters.command(COMMANDS, prefixes=["."]) & filters.private & filters.me)
 async def self_media(client, message):
     try:
         replied = message.reply_to_message
