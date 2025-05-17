@@ -1,7 +1,7 @@
 import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from py_trans import Async_PyTranslator
+from py_trans import PyTranslator
 
 from Zaid.modules.help import add_command_help
 from Zaid.helper.utility import get_arg
@@ -35,9 +35,8 @@ async def pytrans_tr(_, message: Message):
             return await tr_msg.edit("`Please provide both language and text to translate.`\n\nExample: `.tr hi Hello World`")
 
     try:
-        py_trans = Async_PyTranslator()
-        await py_trans.ainit()  # important!
-        translation = await py_trans.atranslate(to_tr, dest_lang, engine=tr_engine)
+        py_trans = PyTranslator()
+        translation = py_trans.translate(to_tr, dest_lang, engine=tr_engine)
     except Exception as e:
         return await tr_msg.edit(f"`Translation failed:` {e}")
 
