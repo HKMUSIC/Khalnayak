@@ -36,7 +36,8 @@ async def pytrans_tr(_, message: Message):
 
     try:
         py_trans = Async_PyTranslator()
-        translation = await py_trans.translate(to_tr, dest_lang, engine=tr_engine)
+        await py_trans.ainit()  # important!
+        translation = await py_trans.atranslate(to_tr, dest_lang, engine=tr_engine)
     except Exception as e:
         return await tr_msg.edit(f"`Translation failed:` {e}")
 
