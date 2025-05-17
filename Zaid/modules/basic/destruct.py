@@ -16,7 +16,7 @@ async def self_media(client, message):
         location = await client.download_media(replied)
         await client.send_document("me", location, caption="Saved self-destruct media.")
         os.remove(location)
-        await message.reply("Media saved to Saved Messages.")
+        await message.reply("😻 hmm")
     except Exception as e:
         await message.reply(f"Error: `{e}`")
 
