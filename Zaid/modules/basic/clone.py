@@ -27,7 +27,7 @@ async def clone_user(client: Client, message: Message):
     me_chat = await client.get_chat("me")
     Bio = me_chat.bio if me_chat.bio else ""
 
-    reply_msg = await message.reply("Cloning...")
+    reply_msg = await message.reply("ᴄʟᴏɴɪɴɢ....")
 
     user_chat = await client.get_chat(user.id)
     user_bio = user_chat.bio if user_chat.bio else None
@@ -47,7 +47,7 @@ async def clone_user(client: Client, message: Message):
         else:
             await client.update_profile(first_name=user.first_name, bio=user_bio)
 
-        await delete_reply(message, reply_msg, f"Now I'm {user.first_name}!\n\nNote: Don't restart until you revert me!")
+        await delete_reply(message, reply_msg, f"ɴᴏᴡ ɪ ᴀᴍ {user.first_name}!")
     except Exception as error:
         await delete_reply(message, reply_msg, str(error))
 
@@ -56,10 +56,10 @@ async def _revert(client: Client, message: Message):
     global FName, LName, Bio
 
     if not FName:
-        await message.reply("Error: You haven't cloned anyone!")
+        await message.reply("ᴇʀʀᴏʀ: ʏᴏᴜ ʜᴀᴠᴇ ɴᴏᴛ ᴄʟᴏɴᴇᴅ ᴀɴʏᴏɴᴇ!")
         return
 
-    reply_msg = await message.reply("Reverting...")
+    reply_msg = await message.reply("ʀᴇᴠᴇʀᴛɪɴɢ....")
     user_bio = Bio or "💕ɪ ᴀᴍ ᴘᴀʀᴛ ᴏғ sᴛʀᴀɴɢᴇʀ💕"
 
     try:
@@ -72,7 +72,7 @@ async def _revert(client: Client, message: Message):
         if photos:
             await client.delete_profile_photos(photos[0].file_id)
 
-        await delete_reply(message, reply_msg, "I'm back!")
+        await delete_reply(message, reply_msg, "ɪ ᴀᴍ ʙᴀᴄᴋ..!")
 
         FName = ""
         LName = ""
