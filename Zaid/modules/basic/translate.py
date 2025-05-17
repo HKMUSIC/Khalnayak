@@ -35,8 +35,8 @@ async def pytrans_tr(_, message: Message):
             return await tr_msg.edit("`Please provide both language and text to translate.`\n\nExample: `.tr hi Hello World`")
 
     try:
-        py_trans = Async_PyTranslator(provider=tr_engine)
-        translation = await py_trans.translate(to_tr, dest_lang)
+        py_trans = Async_PyTranslator()
+        translation = await py_trans.translate(to_tr, dest_lang, engine=tr_engine)
     except Exception as e:
         return await tr_msg.edit(f"`Translation failed:` {e}")
 
