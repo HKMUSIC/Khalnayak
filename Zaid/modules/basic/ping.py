@@ -92,5 +92,6 @@ add_command_help(
     "ping",
     [
         ["ping", "Check bot alive or not."],
+        ["speedtest", "check bot speed."],
     ],
 )
