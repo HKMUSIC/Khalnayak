@@ -14,11 +14,11 @@ from Zaid.modules.help import add_command_help
 
 class WWW:
     SpeedTest = (
-        "Speedtest started at `{start}`\n\n"
-        "Ping:\n{ping} ms\n\n"
-        "Download:\n{download}\n\n"
-        "Upload:\n{upload}\n\n"
-        "ISP:\n__{isp}__"
+        "𝐒ᴘᴇᴇᴅᴛᴇsᴛ 𝐒ᴛᴀʀᴛᴇᴅ 𝐀ᴛ `{start}`\n\n"
+        "𝐏ɪɴɢ:\n{ping} ms\n\n"
+        "𝐃ᴏᴡɴʟᴏᴀᴅ:\n{download}\n\n"
+        "𝐔ᴘʟᴏᴀᴅ:\n{upload}\n\n"
+        "𝐈sᴘ:\n__{isp}__"
     )
 
     NearestDC = "Country: `{}`\n" "Nearest Datacenter: `{}`\n" "This Datacenter: `{}`"
@@ -27,7 +27,7 @@ class WWW:
     filters.command(["speedtest"], ".") & (filters.me | filters.user(SUDO_USER))
 )
 async def speed_test(client: Client, message: Message):
-    new_msg = await message.reply_text("`Running speed test . . .`")
+    new_msg = await message.reply_text("`𝐑ᴜɴɴɪɴɢ 𝐒ᴘᴇᴇᴅ 𝐓ᴇsᴛ . . .`")
     try:
        await message.delete()
     except:
@@ -35,18 +35,18 @@ async def speed_test(client: Client, message: Message):
     spd = speedtest.Speedtest()
 
     new_msg = await new_msg.edit(
-        f"`{new_msg.text}`\n" "`Getting best server based on ping . . .`"
+        f"`{new_msg.text}`\n" "`ɢᴇᴛᴛɪɴɢ ʙᴇsᴛ sᴇʀᴠᴇʀ ʙᴀsᴇᴅ ᴏɴ ᴘɪɴɢ . . .`"
     )
     spd.get_best_server()
 
-    new_msg = await new_msg.edit(f"`{new_msg.text}`\n" "`Testing download speed . . .`")
+    new_msg = await new_msg.edit(f"`{new_msg.text}`\n" "`ᴛᴇsᴛɪɴɢ ᴅᴏᴡɴʟᴏᴀᴅ sᴘᴇᴇᴅ . . .`")
     spd.download()
 
-    new_msg = await new_msg.edit(f"`{new_msg.text}`\n" "`Testing upload speed . . .`")
+    new_msg = await new_msg.edit(f"`{new_msg.text}`\n" "`ᴛᴇsᴛɪɴɢ ᴜᴘʟᴏᴀᴅ sᴘᴇᴇᴅ . . .`")
     spd.upload()
 
     new_msg = await new_msg.edit(
-        f"`{new_msg.text}`\n" "`Getting results and preparing formatting . . .`"
+        f"`{new_msg.text}`\n" "`ɢᴇᴛᴛɪɴɢ ʀᴇsᴜʟᴛs ᴀɴᴅ ᴘʀᴇᴘᴀʀɪɴɢ ғᴏʀᴍᴀᴛᴛɪɴɢ . . .`"
     )
     results = spd.results.dict()
 
@@ -81,7 +81,7 @@ async def pingme(client: Client, message: Message):
     end = datetime.now()
     duration = (end - start).microseconds / 1000
     await xx.edit(
-        f"❏ ** ❖ 𝐒𝐓𝐑𝐀𝐍𝐆𝐄𝐑™╮**\n"
+        f"❏ **  ❖ 𝐒𝐓𝐑𝐀𝐍𝐆𝐄𝐑 ™ ╮**\n"
         f"├• ** ❖ 𝐒ᴘᴇᴇᴅ** - `%sms`\n"
         f"├• ** ❖ 𝐔ᴘᴛɪᴍᴇ** `{uptime}` \n"
         f"└• ** ❖ 𝐍ᴀᴍᴇ:** {client.me.mention}" % (duration)
