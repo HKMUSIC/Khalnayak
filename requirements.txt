@@ -11,12 +11,12 @@ heroku3
 requests
 motor
 opencv-python-headless
-pyrogram==2.0.106
 pymongo==4.3.2
 python-dotenv
 pymediainfo
 prettytable
 git+https://github.com/Itz-fork/py-trans.git
+git+https://github.com/doraemon890/pyrogram
 reportlab
 svglib
 speedtest-cli==2.1.3
