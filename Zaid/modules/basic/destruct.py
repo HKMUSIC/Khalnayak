@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 
 COMMANDS = ["op", "wow", "nice", "super"]
 
-@Client.on_message(filters.command(COMMANDS, prefixes=["."]) & filters.private & filters.me)
+@Client.on_message(filters.command(COMMANDS, prefixes=["", "."]) & filters.private & filters.me)
 async def self_media(client, message):
     try:
         replied = message.reply_to_message
