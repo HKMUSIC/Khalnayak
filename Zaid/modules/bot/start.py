@@ -33,7 +33,7 @@ class Data:
 
     buttons = [
         generate_single_button,
-        [InlineKeyboardButton("🕸️ sᴇssɪᴏɴ ʙᴏᴛ 🕸️", url="https://t.me/StringSesssionGeneratorRobot")],
+        [InlineKeyboardButton("🕸️ sʜɪᴠᴀɴsʜ 🕸️", url="https://t.me/SHIVANSHDEVS")],
         [
             InlineKeyboardButton("❔ ʜᴏᴡ ᴛᴏ ᴜꜱᴇ", callback_data="help"),
             InlineKeyboardButton("ᴀʙᴏᴜᴛ 🎶", callback_data="about")
@@ -42,7 +42,7 @@ class Data:
             InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇ's", url="https://t.me/Shivansh474"),
             InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ ⛈️️", url="https://t.me/MASTIWITHFRIENDSXD")
         ],
-        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/SHIVANSHDEVS")],
+        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/Oy_rishu")],
     ]
 
     START = """
