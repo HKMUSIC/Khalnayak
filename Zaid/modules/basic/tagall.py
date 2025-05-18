@@ -33,7 +33,7 @@ async def mentionall(client: Client, message: Message):
             break
         usrnum += 1
         usrtxt += f"[{usr.user.first_name}](tg://user?id={usr.user.id}), "
-        if usrnum == 5:
+        if usrnum == 1:
             if args:
                 txt = f"{args}\n\n{usrtxt}"
                 await client.send_message(chat_id, txt)
