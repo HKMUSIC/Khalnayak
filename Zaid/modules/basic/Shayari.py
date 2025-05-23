@@ -179,16 +179,4 @@ async def cancel_spam(client, message):
             pass
         return await message.reply("♦ OFFFFFFFFF♦")
              
-              add_command_help(
-    "shayari",
-    [
-        [
-            ".shayari ",
-            "shayari Spam",
-        ],
-        [
-            "shstop",
-            f"to stop .shayari",
-        ],
-    ],
-              )
+              
