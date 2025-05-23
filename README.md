@@ -1,6 +1,6 @@
-<p align="center">⚡️𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥-𝗨𝗦𝗘𝗥𝗕𝗢𝗧⚡️</p>
+<p align="center">⚡️𝗦𝗧𝗔𝗟𝗞𝗘𝗥-𝗨𝗦𝗘𝗥𝗕𝗢𝗧⚡️</p>
 
-<img src="https://files.catbox.moe/r58nec.jpg">
+<img src="https://files.catbox.moe/rz44me.jpg">
 
 <p align="center">⚡️𝗔 𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟 𝗜𝗗 𝗨𝗦𝗘𝗥𝗕𝗢𝗧⚡️</p>
 
@@ -37,7 +37,7 @@
 
 ## Deploy To Render 
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/RDXSHUKLA/USERBOT)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/shoaib910385/STALKERUSERBOT)
 
 
 ```
@@ -60,8 +60,7 @@ and you ended up in a Finale Battle with Telegram and at the end
 ```
 
 ## Credits 💖
-- [𝗦𝗛𝗜𝗩𝗔𝗡𝗦𝗛](https://t.me/SHIVANSH39)
-- [𝗦𝗧𝗥𝗔𝗡𝗚𝗘𝗥](https://t.me/SHIVANSH474) 
+- [𝗦𝗧𝗔𝗟𝗞𝗘𝗥](https://t.me/HEHE_STALKER) 
 
 ## Support / Channel
 
