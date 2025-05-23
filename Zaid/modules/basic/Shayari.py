@@ -93,7 +93,7 @@ SHAYRI = [ " 🌺**बहुत अच्छा लगता है तुझे
     
 
 
-@app.on_message(filters.command(["shayari" ], prefixes=["/", "@", "#"]))
+@Client.on_message(filters.command(["shayari" ], prefixes=["/", "@", "#"]))
 async def mentionall(client, message):
     chat_id = message.chat.id
     if message.chat.type == ChatType.PRIVATE:
@@ -114,7 +114,7 @@ async def mentionall(client, message):
         return await message.reply("𝐘𝐨𝐮 𝐀𝐫𝐞 𝐍𝐨𝐭 𝐀𝐝𝐦𝐢𝐧 𝐁𝐚𝐛𝐲, 𝐎𝐧𝐥𝐲 𝐀𝐝𝐦𝐢𝐧𝐬 𝐂𝐚𝐧 . ")
 
     if message.reply_to_message and message.text:
-        return await message.reply("/shayaril  𝐓𝐲𝐩𝐞 𝐋𝐢𝐤𝐞 𝐓𝐡𝐢𝐬 / 𝐑𝐞𝐩𝐥𝐲 𝐀𝐧𝐲 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐍𝐞𝐱𝐭 𝐓𝐢𝐦𝐞 ")
+        return await message.reply(".shayaril  𝐓𝐲𝐩𝐞 𝐋𝐢𝐤𝐞 𝐓𝐡𝐢𝐬 / 𝐑𝐞𝐩𝐥𝐲 𝐀𝐧𝐲 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐍𝐞𝐱𝐭 𝐓𝐢𝐦𝐞 ")
     elif message.text:
         mode = "text_on_cmd"
         msg = message.text
@@ -155,7 +155,7 @@ async def mentionall(client, message):
 
 #
 
-@app.on_message(filters.command(["shstop", "shayarioff"]))
+@Client.on_message(filters.command(["shstop", "shayarioff"]))
 async def cancel_spam(client, message):
     if not message.chat.id in spam_chats:
         return await message.reply("𝐂𝐮𝐫𝐫𝐞𝐧𝐭𝐥𝐲 𝐈'𝐦 𝐍𝐨𝐭 ..")
@@ -178,3 +178,17 @@ async def cancel_spam(client, message):
         except:
             pass
         return await message.reply("♦ OFFFFFFFFF♦")
+             
+              add_command_help(
+    "shayari",
+    [
+        [
+            ".shayari ",
+            "shayari Spam",
+        ],
+        [
+            "shstop",
+            f"to stop .shayari",
+        ],
+    ],
+              )
