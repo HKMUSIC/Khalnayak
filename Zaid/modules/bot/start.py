@@ -33,28 +33,28 @@ class Data:
 
     buttons = [
         generate_single_button,
-        [InlineKeyboardButton("🕸️ ⏤͟͟͞➖⃟ɴᴏᴛ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 🕸️", url="https://t.me/hehe_stalker")],
+        [InlineKeyboardButton("𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪", url="https://t.me/II_YOUR_GOJO_ll")],
         [
             InlineKeyboardButton("❔ ʜᴏᴡ ᴛᴏ ᴜꜱᴇ", callback_data="help"),
             InlineKeyboardButton("ᴀʙᴏᴜᴛ 🎶", callback_data="about")
         ],
         [
-            InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇ's", url="https://t.me/lll_drx_network_lll"),
-            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ ⛈️️", url="https://t.me/drx_supportchat")
+            InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇ's", url="https://t.me/GOJO_SUPPORT_GROUP_II"),
+            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ ⛈️️", url="https://t.me/II_CHATS_II")
         ],
-        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/hehe_stalker")],
+        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/II_YOUR_GOJO_ll")],
     ]
 
     START = """
 **┌────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞‌‌‌‌★**
-**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [˹𝐒ᴛᴀʟᴋᴇʀ ✘ 𝐇ᴏꜱᴛᴇʀ˼](https://t.me/Stalkeruserbot)**
+**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [˹𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪˼](https://t.me/Gojo_spam_bot)**
 **┆● ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ !** 
 **└────────────────────────•**
 **❖ ɪ ᴀᴍ ᴀ ᴘᴏᴡᴇʀғᴜʟ ɪᴅ-ᴜsᴇʀ-ʙᴏᴛ**
 **❖ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ ғᴏʀ ғᴜɴ.**
 **❖ ɪ ᴄᴀɴ ʙᴏᴏsᴛ ʏᴏᴜʀ ɪᴅ **
 **•─────────────────────────•**
-**❖ ʙʏ : [⏤͟͟͞➖⃟ɴᴏᴛ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍](https://t.me/hehe_stalker) 🚩**
+**❖ ʙʏ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll) 🚩**
 """
 
     HELP = """
@@ -87,17 +87,17 @@ class Data:
 **sᴜᴘᴘᴏʀᴛᴇᴅ :- ʀᴇᴘʟʏ-ʀᴀɪᴅ, ɪᴅ-ᴄʟᴏɴᴇ, ʀᴀɪᴅ, sᴘᴀᴍ, ᴜsᴇʀ-ᴛᴀɢɢᴇʀ ᴇᴛᴄ.**
 
 **◌ ʟᴀɴɢᴜᴀɢᴇ : [ᴘʏᴛʜᴏɴ](https://www.python.org)**
-**◌ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [⏤͟͟͞➖⃟ɴᴏᴛ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍](https://t.me/hehe_stalker)**
-**◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [⏤͟͟͞➖⃟ɴᴏᴛ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍](https://t.me/hehe_stalker)**
+**◌ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll)**
+**◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll)**
 """
 
     DONATE = """
 **❖ ʜᴇʏ, ɪ ᴀᴍ ɢʟᴀᴅ ᴛᴏ ᴋɴᴏᴡ ʏᴏᴜ ᴀʀᴇ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ ᴅᴏɴᴀᴛɪɴɢ ᴜs ᴛʜᴀᴛ ᴍᴇᴀɴ ᴀ ʟᴏᴛ :)**
 
 **ᴡᴇ ᴘʀᴏᴠɪᴅᴇ 24×7 ᴜsᴇʙᴏᴛ ʜᴏsᴛɪɴɢ sᴇʀᴠɪᴄᴇ. sᴏ ᴡᴇ ᴀʟsᴏ ɴᴇᴇᴅ sᴏᴍᴇ ʜᴇʟᴘ ғᴏʀ ɪᴛ, ᴅᴏɴᴀᴛᴇ ɴᴏᴡ ᴠɪᴀ :-**
-**• ᴜᴘɪ ɪᴅ » **`aryan987487@fam or shoaibrafiq@fam`
-**• ǫʀ ᴄᴏᴅᴇ » [ᴛᴀᴘ ᴛᴏ sᴇᴇ ǫʀ ᴄᴏᴅᴇ](https://t.me/Stalker_qr/2) **
-**• ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ʙʏ ᴄᴏɴᴛᴀᴄᴛɪɴɢ [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/hehe_stalker) 🚩**
+**• ᴜᴘɪ ɪᴅ » **`himanshu49@fam or himanshu4hk9@okhdfcbank`
+**• ǫʀ ᴄᴏᴅᴇ » [ᴛᴀᴘ ᴛᴏ sᴇᴇ ǫʀ ᴄᴏᴅᴇ](https://t.me/GOJO_PAY_49) **
+**• ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ʙʏ ᴄᴏɴᴛᴀᴄᴛɪɴɢ [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/II_YOUR_GOJO_ll) 🚩**
 
 **ʏᴏᴜʀ sᴍᴀʟʟ ᴀᴍᴏᴜɴᴛ ᴄᴀɴ ʜᴇʟᴘ ᴜs ᴀɴᴅ sᴛʀᴀɴɢᴇʀ ᴛᴏ ɢʀᴏᴡ ᴍᴏʀᴇ**
 """
