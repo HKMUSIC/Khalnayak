@@ -6,7 +6,7 @@ from Zaid import app
 
 #--------------------------
 
-MUST_JOIN = "𝐀𝐍𝐈𝐌𝐄 𝐂𝐇𝐀𝐓 𝐆𝐑𝐎𝐔𝐏"
+MUST_JOIN = "II_CHATS_II"
 #------------------------
 @app.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
@@ -17,7 +17,7 @@ async def must_join_channel(app: Client, msg: Message):
             await app.get_chat_member(MUST_JOIN, msg.from_user.id)
         except UserNotParticipant:
             if MUST_JOIN.isalpha():
-                link = "https://t.me/II_CHATS_II" + MUST_JOIN
+                link = "https://t.me/" + MUST_JOIN
             else:
                 chat_info = await app.get_chat(MUST_JOIN)
                 link = chat_info.invite_link
