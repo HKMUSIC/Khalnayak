@@ -5,7 +5,7 @@ from Zaid import app
 
 #--------------------------
 
-MUST_JOIN = "gojo_spam"
+MUST_JOIN = "GOJO_SPAM"
 #------------------------
 @app.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
