@@ -5,7 +5,7 @@ from Zaid import app
 
 #--------------------------
 
-MUST_JOIN = "II_CHATS_II"
+MUST_JOIN = "II_YOUR_GOJO_i"
 #------------------------
 @app.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
