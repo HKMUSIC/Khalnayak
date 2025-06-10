@@ -42,19 +42,19 @@ class Data:
             InlineKeyboardButton("⚡ ᴜᴘᴅᴀᴛᴇ's", url="https://t.me/GOJO_SUPPORT_GROUP_II"),
             InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ ⛈️️", url="https://t.me/II_CHATS_II")
         ],
-        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/II_YOUR_GOJO_ll")],
+        [InlineKeyboardButton("🌿 ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ 🌿", url="https://t.me/beingkhalnayak")],
     ]
 
     START = """
 **┌────── ˹ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ˼ ⏤͟͟͞͞‌‌‌‌★**
-**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [˹𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪˼](https://t.me/Gojo_spam_bot)**
+**┆◍ ʜᴇʏ, ɪ ᴀᴍ : [˹𝐁ᴇᴀsᴛ ✘ 𝐇ᴏꜱᴛᴇʀ˼](https://t.me/BeastUserr_Bot)**
 **┆● ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ !** 
 **└────────────────────────•**
 **❖ ɪ ᴀᴍ ᴀ ᴘᴏᴡᴇʀғᴜʟ ɪᴅ-ᴜsᴇʀ-ʙᴏᴛ**
 **❖ ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴍᴇ ғᴏʀ ғᴜɴ.**
 **❖ ɪ ᴄᴀɴ ʙᴏᴏsᴛ ʏᴏᴜʀ ɪᴅ **
 **•─────────────────────────•**
-**❖ ʙʏ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll) 🚩**
+**❖ ʙʏ : [愛 I 𝐊𝐇𝐀𝐋𝐍𝐀𝐘𝐀𝐊](https://t.me/beingkhalnayak) 🚩**
 """
 
     HELP = """
@@ -68,7 +68,7 @@ class Data:
 **/remove - ʟᴏɢᴏᴜᴛ ғʀᴏᴍ ʙᴏᴛ**
 """
 
-    GUIDE = """**❖ ʜᴇʏ ᴅᴇᴀʀ, ᴛʜɪs ɪs ᴀ ǫᴜɪᴄᴋ ᴀɴᴅ sɪᴍᴘʟᴇ ɢᴜɪᴅᴇ ᴛᴏ ʜᴏsᴛɪɴɢ [ᴜsᴇʀʙᴏᴛ](https://t.me/Gojo_spam_bot)**
+    GUIDE = """**❖ ʜᴇʏ ᴅᴇᴀʀ, ᴛʜɪs ɪs ᴀ ǫᴜɪᴄᴋ ᴀɴᴅ sɪᴍᴘʟᴇ ɢᴜɪᴅᴇ ᴛᴏ ʜᴏsᴛɪɴɢ [ᴜsᴇʀʙᴏᴛ](https://t.me/BeastUserr_Bot)**
 
 **1) Sᴇɴᴅ /add ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ᴛʜᴇ ʙᴏᴛ **
 **2) Sᴇɴᴅ ʏᴏᴜʀ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ ɪɴ ɪɴᴛᴇʀɴᴀᴛɪᴏɴᴀʟ ғᴏʀᴍᴀᴛ (ᴇ.ɢ. +917800000000)**  
@@ -87,8 +87,8 @@ class Data:
 **sᴜᴘᴘᴏʀᴛᴇᴅ :- ʀᴇᴘʟʏ-ʀᴀɪᴅ, ɪᴅ-ᴄʟᴏɴᴇ, ʀᴀɪᴅ, sᴘᴀᴍ, ᴜsᴇʀ-ᴛᴀɢɢᴇʀ ᴇᴛᴄ.**
 
 **◌ ʟᴀɴɢᴜᴀɢᴇ : [ᴘʏᴛʜᴏɴ](https://www.python.org)**
-**◌ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll)**
-**◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲.𓆪](https://t.me/II_YOUR_GOJO_ll)**
+**◌ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [愛 I 𝐊𝐇𝐀𝐋𝐍𝐀𝐘𝐀𝐊](https://t.me/beingkhalnayak)**
+**◌ ᴅᴇᴠᴇʟᴏᴘᴇʀ : [愛 I 𝐊𝐇𝐀𝐋𝐍𝐀𝐘𝐀𝐊](https://t.me/beingkhalnayak)**
 """
 
     DONATE = """
@@ -97,7 +97,7 @@ class Data:
 **ᴡᴇ ᴘʀᴏᴠɪᴅᴇ 24×7 ᴜsᴇʙᴏᴛ ʜᴏsᴛɪɴɢ sᴇʀᴠɪᴄᴇ. sᴏ ᴡᴇ ᴀʟsᴏ ɴᴇᴇᴅ sᴏᴍᴇ ʜᴇʟᴘ ғᴏʀ ɪᴛ, ᴅᴏɴᴀᴛᴇ ɴᴏᴡ ᴠɪᴀ :-**
 **• ᴜᴘɪ ɪᴅ » **`himanshu49@fam or himanshu4hk9@okhdfcbank`
 **• ǫʀ ᴄᴏᴅᴇ » [ᴛᴀᴘ ᴛᴏ sᴇᴇ ǫʀ ᴄᴏᴅᴇ](https://t.me/GOJO_PAY_49) **
-**• ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ʙʏ ᴄᴏɴᴛᴀᴄᴛɪɴɢ [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/II_YOUR_GOJO_ll) 🚩**
+**• ʏᴏᴜ ᴄᴀɴ ᴀʟsᴏ ᴅᴏɴᴀᴛᴇ ʙʏ ᴄᴏɴᴛᴀᴄᴛɪɴɢ [ᴅᴇᴠᴇʟᴏᴘᴇʀ](https://t.me/beingkhalnayak) 🚩**
 
 **ʏᴏᴜʀ sᴍᴀʟʟ ᴀᴍᴏᴜɴᴛ ᴄᴀɴ ʜᴇʟᴘ ᴜs ᴀɴᴅ sᴛʀᴀɴɢᴇʀ ᴛᴏ ɢʀᴏᴡ ᴍᴏʀᴇ**
 """
