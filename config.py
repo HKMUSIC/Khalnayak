@@ -9,16 +9,16 @@ if os.path.exists("local.env"):
 API_ID = int(getenv("API_ID", "6435225")) #optional
 API_HASH = getenv("API_HASH", "") #optional
 
-SUDO_USERS = list(map(int, getenv("SUDO_USERS", "").split()))
-OWNER_ID = int(getenv("OWNER_ID","6762113050"))
+SUDO_USERS = list(map(int, getenv("SUDO_USERS", "7553434931").split()))
+OWNER_ID = int(getenv("OWNER_ID","7877263279"))
 MONGO_URL = getenv("MONGO_URL")
 BOT_TOKEN = getenv("BOT_TOKEN", "")
-ALIVE_PIC = getenv("ALIVE_PIC", 'https://files.catbox.moe/xvbz5a.jpg')
+ALIVE_PIC = getenv("ALIVE_PIC", 'https://files.catbox.moe/n2zion.jpg')
 ALIVE_TEXT = getenv("ALIVE_TEXT")
 PM_LOGGER = getenv("PM_LOGGER")
 LOG_GROUP = getenv("LOG_GROUP")
 GIT_TOKEN = getenv("GIT_TOKEN") #personal access token
-REPO_URL = getenv("REPO_URL", "https://github.com/Hkmusic/hkspam")
+REPO_URL = getenv("REPO_URL", "https://github.com/Hkmusic/khalnayak")
 BRANCH = getenv("BRANCH", "master") #don't change
  
 STRING_SESSION1 = getenv("STRING_SESSION1", "")
