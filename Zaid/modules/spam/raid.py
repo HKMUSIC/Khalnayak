@@ -43,7 +43,7 @@ async def hiraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -70,7 +70,7 @@ async def hiraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉."
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -106,7 +106,7 @@ async def pbraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -133,7 +133,7 @@ async def pbraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -168,7 +168,7 @@ async def mraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -195,7 +195,7 @@ async def mraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -230,7 +230,7 @@ async def eraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -257,7 +257,7 @@ async def eraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -292,7 +292,7 @@ async def wordraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
@@ -319,7 +319,7 @@ async def wordraid(xspam: Client, e: Message):
                 text = f"ᴄʜᴀʟ ᴄʜᴀʟ ʙᴀᴀᴘ ᴋᴏ ᴍᴀᴛ sɪᴋʜᴀ😈"
                 await e.reply_text(text)
           elif int(id) in SUDO_USERS:
-                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𝙎𝙏𝚲𝙇𝙆𝙀𝙍 ◉"
+                text = f"ᴀʙᴇ ʟᴀᴡᴅᴇ ᴛʜᴀᴛ ɢᴜʏ ɪs ʙʀᴏ ᴏғ 𓆩𝐆𐑴𝐣𝛐 𝐈𝐧𝐟𝛊𝐧𝛊𝐭𝐲𓆪"
                 await e.reply_text(text)
           else:
               fname = ok.first_name
